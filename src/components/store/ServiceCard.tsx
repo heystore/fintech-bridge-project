@@ -41,18 +41,15 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
       <div className="absolute inset-0 bg-white dark:bg-gray-800" />
       
       {service.backgroundImage && (
-        <>
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url(${service.backgroundImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-          <div className="absolute inset-0 bg-white/15" />
-        </>
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${service.backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
       )}
       
       <div className="relative z-10 p-5 flex flex-col h-full">
