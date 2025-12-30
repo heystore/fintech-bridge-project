@@ -30,9 +30,10 @@ def handler(event: dict, context) -> dict:
             cur.execute('''
                 SELECT id, name, type, category, icon, description, price, cta,
                        background_image as "backgroundImage", logo_svg as "logoSvg",
-                       accepts_visa as "acceptsVisa", accepts_mastercard as "acceptsMastercard"
+                       accepts_visa as "acceptsVisa", accepts_mastercard as "acceptsMastercard",
+                       priority
                 FROM services
-                ORDER BY created_at DESC
+                ORDER BY priority DESC, created_at DESC
             ''')
             services = cur.fetchall()
             
@@ -51,14 +52,15 @@ def handler(event: dict, context) -> dict:
             cur.execute('''
                 INSERT INTO services (
                     id, name, type, category, icon, description, price, cta,
-                    background_image, logo_svg, accepts_visa, accepts_mastercard
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    background_image, logo_svg, accepts_visa, accepts_mastercard, priority
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id
             ''', (
                 data['id'], data['name'], data['type'], data['category'],
                 data['icon'], data['description'], data['price'], data['cta'],
                 data.get('backgroundImage'), data.get('logoSvg'),
-                data.get('acceptsVisa', False), data.get('acceptsMastercard', False)
+                data.get('acceptsVisa', False), data.get('acceptsMastercard', False),
+                data.get('priority', 0)
             ))
             
             conn.commit()
@@ -82,6 +84,7 @@ def handler(event: dict, context) -> dict:
                     description = %s, price = %s, cta = %s,
                     background_image = %s, logo_svg = %s,
                     accepts_visa = %s, accepts_mastercard = %s,
+                    priority = %s,
                     updated_at = CURRENT_TIMESTAMP
                 WHERE id = %s
             ''', (
@@ -89,6 +92,7 @@ def handler(event: dict, context) -> dict:
                 data['description'], data['price'], data['cta'],
                 data.get('backgroundImage'), data.get('logoSvg'),
                 data.get('acceptsVisa', False), data.get('acceptsMastercard', False),
+                data.get('priority', 0),
                 data['id']
             ))
             

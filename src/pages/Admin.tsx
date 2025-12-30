@@ -21,6 +21,7 @@ interface Service {
   logoSvg?: string;
   acceptsVisa?: boolean;
   acceptsMastercard?: boolean;
+  priority?: number;
 }
 
 const API_URL = 'https://functions.poehali.dev/692cf256-c3fb-49b8-9844-ae94296d195a';
@@ -182,7 +183,8 @@ const Admin = () => {
       icon: 'CreditCard',
       description: '',
       price: '0 USDT',
-      cta: 'Подключить'
+      cta: 'Подключить',
+      priority: 0
     };
     setEditingService(newService);
     setIsAddingNew(true);

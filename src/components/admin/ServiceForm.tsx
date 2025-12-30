@@ -15,6 +15,7 @@ interface Service {
   logoSvg?: string;
   acceptsVisa?: boolean;
   acceptsMastercard?: boolean;
+  priority?: number;
 }
 
 interface ServiceFormProps {
@@ -122,6 +123,19 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                 onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
                 className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white"
                 placeholder="CreditCard"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Приоритет (чем выше, тем выше в списке)
+              </label>
+              <input
+                type="number"
+                value={formData.priority || 0}
+                onChange={(e) => setFormData({ ...formData, priority: parseInt(e.target.value) || 0 })}
+                className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white"
+                placeholder="0"
               />
             </div>
           </div>

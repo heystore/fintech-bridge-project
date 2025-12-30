@@ -21,6 +21,7 @@ interface Service {
   logoSvg?: string;
   acceptsVisa?: boolean;
   acceptsMastercard?: boolean;
+  priority?: number;
 }
 
 const API_URL = 'https://functions.poehali.dev/692cf256-c3fb-49b8-9844-ae94296d195a';
