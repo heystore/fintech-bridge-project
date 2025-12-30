@@ -46,16 +46,7 @@ const Index = () => {
       title: 'Премиум VPN',
       badge: 'FREE',
       icon: 'Shield',
-      hasSubmenu: true,
-      submenu: [
-        { id: 'vpn-es', title: '🇪🇸 Испания', icon: 'MapPin' },
-        { id: 'vpn-de', title: '🇩🇪 Германия', icon: 'MapPin' },
-        { id: 'vpn-it', title: '🇮🇹 Италия', icon: 'MapPin' },
-        { id: 'vpn-se', title: '🇸🇪 Швеция', icon: 'MapPin' },
-        { id: 'vpn-gb', title: '🇬🇧 Великобритания', icon: 'MapPin' },
-        { id: 'vpn-il', title: '🇮🇱 Израиль', icon: 'MapPin' },
-        { id: 'vpn-sg', title: '🇸🇬 Сингапур', icon: 'MapPin' }
-      ]
+      hasSubmenu: false
     },
     {
       id: 'esim',
