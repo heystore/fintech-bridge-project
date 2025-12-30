@@ -13,6 +13,8 @@ interface Service {
   cta: string;
   backgroundImage?: string;
   logoSvg?: string;
+  acceptsVisa?: boolean;
+  acceptsMastercard?: boolean;
 }
 
 interface ServiceFormProps {
@@ -152,6 +154,33 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
             </div>
 
             <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Способы оплаты
+              </label>
+              <div className="space-y-2">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={formData.acceptsVisa || false}
+                    onChange={(e) => setFormData({ ...formData, acceptsVisa: e.target.checked })}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm text-gray-900 dark:text-white">Visa</span>
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={formData.acceptsMastercard || false}
+                    onChange={(e) => setFormData({ ...formData, acceptsMastercard: e.target.checked })}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm text-gray-900 dark:text-white">Mastercard</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Текст кнопки
               </label>

@@ -11,6 +11,8 @@ interface Service {
   cta: string;
   backgroundImage?: string;
   logoSvg?: string;
+  acceptsVisa?: boolean;
+  acceptsMastercard?: boolean;
 }
 
 interface ServiceCardProps {
@@ -31,12 +33,9 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
       onClick={onClick}
       className={`
         group relative rounded-xl overflow-hidden h-[280px] flex flex-col
-        border-2 transition-all duration-200 text-left
+        transition-all duration-200 text-left
         hover:shadow-lg hover:-translate-y-0.5
-        ${isSelected 
-          ? 'border-blue-500 shadow-lg' 
-          : 'border-gray-200 dark:border-gray-700 hover:border-blue-300'
-        }
+        ${isSelected ? 'ring-4 ring-blue-500 shadow-lg' : ''}
       `}
     >
       <div className="absolute inset-0 bg-white dark:bg-gray-800" />
@@ -62,6 +61,21 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
           ) : (
             <div className="w-11 h-11 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
               <Icon name={service.icon} size={22} className="text-blue-600 dark:text-blue-400" />
+            </div>
+          )}
+          
+          {(service.acceptsVisa || service.acceptsMastercard) && (
+            <div className="flex gap-2">
+              {service.acceptsVisa && (
+                <div className="bg-[#1A1F71] text-white px-3 py-1 rounded text-xs font-bold tracking-wider">
+                  VISA
+                </div>
+              )}
+              {service.acceptsMastercard && (
+                <div className="bg-gradient-to-r from-[#EB001B] to-[#FF5F00] text-white px-2.5 py-1 rounded text-xs font-bold tracking-wider">
+                  mastercard
+                </div>
+              )}
             </div>
           )}
         </div>
