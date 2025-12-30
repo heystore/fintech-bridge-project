@@ -31,14 +31,14 @@ const Index = () => {
       title: 'Мировые eSIM',
       icon: 'Radio',
       x: 120,
-      y: 580
+      y: 530
     },
     {
       id: 'business',
       title: 'IT для бизнеса',
       icon: 'Lightbulb',
       x: 880,
-      y: 580
+      y: 530
     }
   ];
 
@@ -62,10 +62,10 @@ const Index = () => {
         </header>
 
         <main className="pt-20">
-          <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16">
+          <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-8">
             <div className="container mx-auto px-4 relative z-10">
-              <div className="relative max-w-6xl mx-auto h-[650px]">
-                <svg width="100%" height="100%" viewBox="0 0 1000 650" className="absolute inset-0">
+              <div className="relative max-w-6xl mx-auto h-[600px]">
+                <svg width="100%" height="100%" viewBox="0 0 1000 600" className="absolute inset-0">
                   <defs>
                     <filter id="glow">
                       <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -78,7 +78,7 @@ const Index = () => {
                   
                   <line 
                     x1="500" 
-                    y1="350" 
+                    y1="300" 
                     x2="120" 
                     y2="120" 
                     stroke="#2C3E50" 
@@ -88,7 +88,7 @@ const Index = () => {
                   />
                   <line 
                     x1="500" 
-                    y1="350" 
+                    y1="300" 
                     x2="880" 
                     y2="120" 
                     stroke="#2C3E50" 
@@ -98,9 +98,9 @@ const Index = () => {
                   />
                   <line 
                     x1="500" 
-                    y1="350" 
+                    y1="300" 
                     x2="120" 
-                    y2="580" 
+                    y2="530" 
                     stroke="#2C3E50" 
                     strokeWidth="2.5"
                     className="dark:stroke-white/50"
@@ -108,16 +108,16 @@ const Index = () => {
                   />
                   <line 
                     x1="500" 
-                    y1="350" 
+                    y1="300" 
                     x2="880" 
-                    y2="580" 
+                    y2="530" 
                     stroke="#2C3E50" 
                     strokeWidth="2.5"
                     className="dark:stroke-white/50"
                     strokeLinecap="round"
                   />
                   
-                  <g transform="translate(300, 230)">
+                  <g transform="translate(300, 180)">
                     <svg width="400" height="200" viewBox="0 0 974.28 376.03" preserveAspectRatio="xMidYMid meet">
                       <defs>
                         <style>
