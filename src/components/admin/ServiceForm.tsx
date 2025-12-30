@@ -181,17 +181,16 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
           </div>
 
           <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Текст кнопки
-              </label>
-              <input
-                type="text"
-                value={formData.cta}
-                onChange={(e) => setFormData({ ...formData, cta: e.target.value })}
-                className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white"
-                required
-              />
-            </div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Текст кнопки
+            </label>
+            <input
+              type="text"
+              value={formData.cta}
+              onChange={(e) => setFormData({ ...formData, cta: e.target.value })}
+              className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white"
+              required
+            />
           </div>
 
           <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
