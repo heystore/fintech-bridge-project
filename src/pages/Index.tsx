@@ -21,7 +21,7 @@ const Index = () => {
     },
     {
       id: 'kyc',
-      title: 'Верификация КУС',
+      title: 'Верификация KYC',
       icon: 'UserCheck',
       x: 880,
       y: 120
@@ -64,8 +64,8 @@ const Index = () => {
         <main className="pt-20">
           <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16">
             <div className="container mx-auto px-4 relative z-10">
-              <div className="relative max-w-6xl mx-auto h-[700px]">
-                <svg width="100%" height="100%" viewBox="0 0 1000 700" className="absolute inset-0">
+              <div className="relative max-w-6xl mx-auto h-[650px]">
+                <svg width="100%" height="100%" viewBox="0 0 1000 650" className="absolute inset-0">
                   <defs>
                     <filter id="glow">
                       <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -117,7 +117,7 @@ const Index = () => {
                     strokeLinecap="round"
                   />
                   
-                  <g transform="translate(300, 280)">
+                  <g transform="translate(300, 230)">
                     <svg width="400" height="200" viewBox="0 0 974.28 376.03" preserveAspectRatio="xMidYMid meet">
                       <defs>
                         <style>
@@ -223,7 +223,7 @@ const Index = () => {
                     <div className="w-24 h-24 md:w-28 md:h-28 rounded-full border-[3px] border-[#2C3E50] dark:border-white/60 bg-[#6B9AC4] dark:bg-[#4A7BA7] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="UserCheck" size={36} className="text-[#2C3E50] dark:text-white" />
                     </div>
-                    <h3 className="font-bold text-lg mb-2 text-[#2C3E50] dark:text-white">Верификация КУС</h3>
+                    <h3 className="font-bold text-lg mb-2 text-[#2C3E50] dark:text-white">Верификация KYC</h3>
                     <p className="text-sm text-[#2C3E50] dark:text-white/70">Быстрый старт без барьеров</p>
                   </div>
                   
