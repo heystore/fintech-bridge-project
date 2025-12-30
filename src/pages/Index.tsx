@@ -5,7 +5,7 @@ import Icon from '@/components/ui/icon';
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('kyc');
-  const [expandedSections, setExpandedSections] = useState<string[]>(['kyc']);
+  const [expandedSections, setExpandedSections] = useState<string[]>(['esim']);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -35,6 +35,7 @@ const Index = () => {
       title: 'Активация сервисов',
       icon: 'UserCheck',
       hasSubmenu: true,
+      inlineSubmenu: true,
       submenu: [
         { id: 'kyc-fintech', title: 'Финтехи и банки', icon: 'Building' },
         { id: 'kyc-crypto', title: 'Криптобиржи', icon: 'Bitcoin' },
@@ -47,6 +48,7 @@ const Index = () => {
       badge: 'FREE',
       icon: 'Shield',
       hasSubmenu: true,
+      inlineSubmenu: true,
       submenu: [
         { id: 'vpn-es', title: '🇪🇸 Испания', icon: 'MapPin' },
         { id: 'vpn-de', title: '🇩🇪 Германия', icon: 'MapPin' },
@@ -63,7 +65,7 @@ const Index = () => {
       icon: 'Smartphone',
       hasSubmenu: true,
       submenu: [
-        { id: 'esim-gb', title: '🇬🇧 Великобритания', price: '+1', icon: 'Phone' },
+        { id: 'esim-gb', title: '🇬🇧 Великобритания', price: '+44', icon: 'Phone' },
         { id: 'esim-au', title: '🇦🇺 Австралия', price: '+61', icon: 'Phone' },
         { id: 'esim-ca', title: '🇨🇦 Канада', price: '+1', icon: 'Phone' },
         { id: 'esim-us', title: '🇺🇸 США', price: '+1', icon: 'Phone' }
@@ -264,7 +266,7 @@ const Index = () => {
                     <button
                       onClick={() => {
                         setActiveSection(item.id);
-                        if (item.hasSubmenu) toggleSection(item.id);
+                        if (item.hasSubmenu && !item.inlineSubmenu) toggleSection(item.id);
                       }}
                       className={`
                         w-full flex flex-col items-start px-4 py-3 rounded-lg
@@ -276,16 +278,16 @@ const Index = () => {
                       `}
                     >
                       <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <Icon name={item.icon} size={20} />
                           <span className="font-medium">{item.title}</span>
                           {item.badge && (
-                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
+                            <span className="px-2 py-0.5 text-xs font-medium bg-blue-500 text-white rounded">
                               {item.badge}
                             </span>
                           )}
                         </div>
-                        {item.hasSubmenu && (
+                        {item.hasSubmenu && !item.inlineSubmenu && (
                           <Icon 
                             name="ChevronDown" 
                             size={16}
@@ -293,10 +295,20 @@ const Index = () => {
                           />
                         )}
                       </div>
+                      {item.inlineSubmenu && item.submenu && (
+                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1.5 flex flex-wrap gap-1.5">
+                          {item.submenu.map((sub, idx) => (
+                            <span key={sub.id}>
+                              {sub.title}
+                              {idx < item.submenu!.length - 1 && <span className="ml-1.5">•</span>}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </button>
 
                     {/* Подменю */}
-                    {item.hasSubmenu && expandedSections.includes(item.id) && (
+                    {item.hasSubmenu && !item.inlineSubmenu && expandedSections.includes(item.id) && (
                       <div className="ml-4 mt-1 space-y-1">
                         {item.submenu?.map((subitem) => (
                           <button
