@@ -64,8 +64,8 @@ const Index = () => {
         <main className="pt-20">
           <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-8">
             <div className="container mx-auto px-4 relative z-10">
-              <div className="relative max-w-6xl mx-auto h-[600px]">
-                <svg width="100%" height="100%" viewBox="0 0 1000 600" className="absolute inset-0">
+              <div className="relative max-w-6xl mx-auto h-[700px]">
+                <svg width="100%" height="100%" viewBox="0 0 1000 680" className="absolute inset-0">
                   <defs>
                     <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stopColor="#00adee" stopOpacity="0.8">
@@ -203,7 +203,9 @@ const Index = () => {
                         y={service.y - 14} 
                         width="28" 
                         height="28"
+                        opacity="0"
                       >
+                        <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.6s" fill="freeze" />
                         <div className="w-full h-full flex items-center justify-center">
                           <Icon name={service.icon} size={20} className="text-[#2C3E50] dark:text-white" />
                         </div>
@@ -213,9 +215,13 @@ const Index = () => {
                         x={service.x}
                         y={service.y + 95}
                         textAnchor="middle"
-                        className="text-sm md:text-base font-medium fill-[#2C3E50] dark:fill-white"
+                        fontSize="16"
+                        fontWeight="600"
+                        className="fill-[#2C3E50] dark:fill-white"
                         style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}
+                        opacity="0"
                       >
+                        <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.8s" fill="freeze" />
                         {service.title}
                       </text>
                     </g>
