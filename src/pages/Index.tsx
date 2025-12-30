@@ -6,6 +6,7 @@ const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('kyc');
   const [expandedSections, setExpandedSections] = useState<string[]>(['kyc']);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -27,6 +28,21 @@ const Index = () => {
     { flag: '🇦🇺', name: 'Австралия', code: '+61' },
     { flag: '🇨🇦', name: 'Канада', code: '+1' },
     { flag: '🇺🇸', name: 'США', code: '+1' }
+  ];
+
+  const services = [
+    { id: 'revolut', name: 'Revolut', type: 'Финтех', category: 'kyc-fintech', icon: 'CreditCard', description: 'Мультивалютный банк', cta: 'Подключить' },
+    { id: 'wise', name: 'Wise', type: 'Финтех', category: 'kyc-fintech', icon: 'DollarSign', description: 'Международные переводы', cta: 'Подключить' },
+    { id: 'payoneer', name: 'Payoneer', type: 'Платёжная система', category: 'kyc-fintech', icon: 'Wallet', description: 'Платежи для бизнеса', cta: 'Подключить' },
+    { id: 'monzo', name: 'Monzo', type: 'Банк', category: 'kyc-fintech', icon: 'Building2', description: 'Британский цифровой банк', cta: 'Открыть' },
+    { id: 'n26', name: 'N26', type: 'Банк', category: 'kyc-fintech', icon: 'Building', description: 'Европейский мобильный банк', cta: 'Открыть' },
+    { id: 'binance', name: 'Binance', type: 'Криптобиржа', category: 'kyc-crypto', icon: 'Bitcoin', description: 'Крупнейшая криптобиржа', cta: 'Подключить' },
+    { id: 'coinbase', name: 'Coinbase', type: 'Криптобиржа', category: 'kyc-crypto', icon: 'Coins', description: 'Биржа криптовалют', cta: 'Подключить' },
+    { id: 'kraken', name: 'Kraken', type: 'Криптобиржа', category: 'kyc-crypto', icon: 'TrendingUp', description: 'Торговля криптовалютой', cta: 'Подключить' },
+    { id: 'stripe', name: 'Stripe', type: 'Платформа', category: 'kyc-platforms', icon: 'Zap', description: 'Платёжная инфраструктура', cta: 'Интегрировать' },
+    { id: 'paypal', name: 'PayPal', type: 'Платформа', category: 'kyc-platforms', icon: 'ShoppingBag', description: 'Онлайн платежи', cta: 'Подключить' },
+    { id: 'adyen', name: 'Adyen', type: 'Платформа', category: 'kyc-platforms', icon: 'Globe2', description: 'Глобальные платежи', cta: 'Интегрировать' },
+    { id: 'square', name: 'Square', type: 'Платформа', category: 'kyc-platforms', icon: 'Store', description: 'Платежи для торговли', cta: 'Подключить' }
   ];
 
   const menuItems = [
@@ -87,6 +103,13 @@ const Index = () => {
     } else {
       setExpandedSections([...expandedSections, id]);
     }
+  };
+
+  const getFilteredServices = () => {
+    if (activeSection === 'kyc') {
+      return services;
+    }
+    return services.filter(s => s.category === activeSection);
   };
 
   const renderContent = () => {
@@ -168,21 +191,48 @@ const Index = () => {
       );
     }
 
+    const filteredServices = getFilteredServices();
+
     return (
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
-        <div className="flex items-center justify-center h-64">
-          <div className="text-center">
-            <Icon 
-              name={menuItems.find(m => m.id === activeSection)?.icon || 
-                   menuItems.flatMap(m => m.submenu || []).find(s => s.id === activeSection)?.icon || 'Circle'} 
-              size={64} 
-              className="mx-auto mb-4 text-gray-400 dark:text-gray-600"
-            />
-            <p className="text-gray-500 dark:text-gray-400">
-              Контент раздела в разработке
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredServices.map((service) => (
+          <button
+            key={service.id}
+            onClick={() => setSelectedService(service.id)}
+            className={`
+              group relative bg-white dark:bg-gray-800 rounded-xl p-6 
+              border-2 transition-all duration-200 text-left
+              hover:shadow-lg hover:-translate-y-0.5
+              ${selectedService === service.id 
+                ? 'border-blue-500 shadow-lg' 
+                : 'border-gray-200 dark:border-gray-700 hover:border-blue-300'
+              }
+            `}
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div className="w-12 h-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
+                <Icon name={service.icon} size={24} className="text-blue-600 dark:text-blue-400" />
+              </div>
+            </div>
+            
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+              {service.name}
+            </h3>
+            
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              {service.type}
             </p>
-          </div>
-        </div>
+            
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+              {service.description}
+            </p>
+            
+            <div className="flex items-center text-sm font-medium text-blue-600 dark:text-blue-400">
+              {service.cta}
+              <Icon name="ArrowRight" size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </button>
+        ))}
       </div>
     );
   };
@@ -321,8 +371,8 @@ const Index = () => {
           </aside>
 
           {/* Основной контент */}
-          <main className="ml-72 flex-1 p-8">
-            <div className="max-w-4xl mx-auto">
+          <main className="ml-72 flex-1 flex">
+            <div className="flex-1 p-8 pr-0">
               <div className="mb-8">
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                   {menuItems.find(m => m.id === activeSection)?.title || 
@@ -337,6 +387,20 @@ const Index = () => {
 
               {renderContent()}
             </div>
+
+            {/* Правый сайдбар */}
+            <aside className="w-80 p-8 border-l border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/20">
+              <div className="sticky top-24">
+                <div className="flex items-center justify-center h-64 text-center">
+                  <div>
+                    <Icon name="Info" size={48} className="mx-auto mb-4 text-gray-300 dark:text-gray-600" />
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Выберите сервис для<br />просмотра деталей
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </main>
         </div>
 
