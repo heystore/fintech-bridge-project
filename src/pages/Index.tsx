@@ -117,11 +117,14 @@ const Index = () => {
                     strokeLinecap="round"
                   />
                   
-                  <foreignObject x="30%" y="42%" width="40%" height="16%">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <ArnoldMascot />
-                    </div>
-                  </foreignObject>
+                  <image 
+                    href="https://cdn.poehali.dev/files/2025-12-30 12.11.24.jpg"
+                    x="25%"
+                    y="35%"
+                    width="50%"
+                    height="30%"
+                    preserveAspectRatio="xMidYMid meet"
+                  />
                   
                   {services.map((service) => (
                     <g key={service.id}>
