@@ -251,7 +251,7 @@ const Index = () => {
                       key={item.id}
                       onClick={() => setActiveSection(item.id)}
                       className={`
-                        w-full flex items-center px-3 py-2 rounded-md mb-1
+                        w-full flex items-center pl-10 pr-3 py-2 rounded-md mb-1
                         transition-colors duration-150
                         ${activeSection === item.id
                           ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
