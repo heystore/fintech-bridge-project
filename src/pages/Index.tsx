@@ -36,10 +36,9 @@ const Index = () => {
       icon: 'UserCheck',
       hasSubmenu: true,
       submenu: [
-        { id: 'kyc-passport', title: 'Паспорт РФ', icon: 'FileText' },
-        { id: 'kyc-license', title: 'Водительское удостоверение', icon: 'CreditCard' },
-        { id: 'kyc-snils', title: 'СНИЛС', icon: 'Shield' },
-        { id: 'kyc-inn', title: 'ИНН', icon: 'Hash' }
+        { id: 'kyc-fintech', title: 'Финтехи и банки', icon: 'Building' },
+        { id: 'kyc-crypto', title: 'Криптобиржи', icon: 'Bitcoin' },
+        { id: 'kyc-platforms', title: 'Платформы', icon: 'Globe' }
       ]
     },
     {
@@ -58,10 +57,14 @@ const Index = () => {
       id: 'business',
       title: 'IT для бизнеса',
       icon: 'Lightbulb',
-      hasSubmenu: true,
-      submenu: [
-        { id: 'business-cases', title: 'Кейсы', icon: 'Briefcase' }
-      ]
+      hasSubmenu: false
+    },
+    {
+      id: 'business-cases',
+      title: 'Кейсы',
+      icon: 'Briefcase',
+      hasSubmenu: false,
+      isSubitem: true
     }
   ];
 
@@ -219,59 +222,81 @@ const Index = () => {
           {/* Левая навигация */}
           <aside className="fixed left-0 top-[73px] bottom-0 w-64 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
             <nav className="p-4 space-y-1">
-              {menuItems.map((item) => (
-                <div key={item.id}>
-                  <button
-                    onClick={() => {
-                      setActiveSection(item.id);
-                      if (item.hasSubmenu) toggleSection(item.id);
-                    }}
-                    className={`
-                      w-full flex items-center justify-between px-4 py-3 rounded-lg
-                      transition-all duration-200
-                      ${activeSection === item.id
-                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
-                      }
-                    `}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon name={item.icon} size={20} />
-                      <span className="font-medium">{item.title}</span>
-                    </div>
-                    {item.hasSubmenu && (
-                      <Icon 
-                        name="ChevronDown" 
-                        size={16}
-                        className={`transition-transform ${expandedSections.includes(item.id) ? 'rotate-180' : ''}`}
-                      />
-                    )}
-                  </button>
+              {menuItems.map((item) => {
+                if (item.isSubitem) {
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => setActiveSection(item.id)}
+                      className={`
+                        w-full flex items-center gap-3 px-4 py-2 rounded-lg ml-4
+                        transition-all duration-200
+                        ${activeSection === item.id
+                          ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                          : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                        }
+                      `}
+                    >
+                      <Icon name={item.icon} size={16} />
+                      <span className="text-sm font-medium">{item.title}</span>
+                    </button>
+                  );
+                }
 
-                  {/* Подменю */}
-                  {item.hasSubmenu && expandedSections.includes(item.id) && (
-                    <div className="ml-4 mt-1 space-y-1">
-                      {item.submenu?.map((subitem) => (
-                        <button
-                          key={subitem.id}
-                          onClick={() => setActiveSection(subitem.id)}
-                          className={`
-                            w-full flex items-center gap-3 px-4 py-2 rounded-lg
-                            transition-all duration-200
-                            ${activeSection === subitem.id
-                              ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                              : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                            }
-                          `}
-                        >
-                          <Icon name={subitem.icon} size={16} />
-                          <span className="text-sm">{subitem.title}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+                return (
+                  <div key={item.id}>
+                    <button
+                      onClick={() => {
+                        setActiveSection(item.id);
+                        if (item.hasSubmenu) toggleSection(item.id);
+                      }}
+                      className={`
+                        w-full flex items-center justify-between px-4 py-3 rounded-lg
+                        transition-all duration-200
+                        ${activeSection === item.id
+                          ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+                        }
+                      `}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon name={item.icon} size={20} />
+                        <span className="font-medium">{item.title}</span>
+                      </div>
+                      {item.hasSubmenu && (
+                        <Icon 
+                          name="ChevronDown" 
+                          size={16}
+                          className={`transition-transform ${expandedSections.includes(item.id) ? 'rotate-180' : ''}`}
+                        />
+                      )}
+                    </button>
+
+                    {/* Подменю */}
+                    {item.hasSubmenu && expandedSections.includes(item.id) && (
+                      <div className="ml-4 mt-1 space-y-1">
+                        {item.submenu?.map((subitem) => (
+                          <button
+                            key={subitem.id}
+                            onClick={() => setActiveSection(subitem.id)}
+                            className={`
+                              w-full flex items-center gap-3 px-4 py-2 rounded-lg
+                              transition-all duration-200
+                              ${activeSection === subitem.id
+                                ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
+                                : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                              }
+                            `}
+                          >
+                            <Icon name={subitem.icon} size={16} />
+                            <span className="text-sm">{subitem.title}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
           </aside>
 
