@@ -3,13 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
-const ADMIN_PASSWORD = 'HeyStore2025!Secure#Admin';
+const DEFAULT_PASSWORD = 'HeyStore2025!Secure#Admin';
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [changePasswordError, setChangePasswordError] = useState('');
+  const [changePasswordSuccess, setChangePasswordSuccess] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,17 +23,56 @@ const Admin = () => {
     if (auth === 'true') {
       setIsAuthenticated(true);
     }
+    if (!localStorage.getItem('admin_password')) {
+      localStorage.setItem('admin_password', DEFAULT_PASSWORD);
+    }
   }, []);
+
+  const getStoredPassword = () => {
+    return localStorage.getItem('admin_password') || DEFAULT_PASSWORD;
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
+    if (password === getStoredPassword()) {
       setIsAuthenticated(true);
       sessionStorage.setItem('admin_auth', 'true');
       setError('');
     } else {
       setError('Неверный пароль');
     }
+  };
+
+  const handleChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setChangePasswordError('');
+    setChangePasswordSuccess('');
+
+    if (currentPassword !== getStoredPassword()) {
+      setChangePasswordError('Текущий пароль неверен');
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      setChangePasswordError('Новый пароль должен быть не менее 8 символов');
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setChangePasswordError('Пароли не совпадают');
+      return;
+    }
+
+    localStorage.setItem('admin_password', newPassword);
+    setChangePasswordSuccess('Пароль успешно изменён');
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
+    
+    setTimeout(() => {
+      setShowChangePassword(false);
+      setChangePasswordSuccess('');
+    }, 2000);
   };
 
   const handleLogout = () => {
@@ -112,6 +157,10 @@ const Admin = () => {
             >
               <Icon name={darkMode ? 'Sun' : 'Moon'} size={20} />
             </Button>
+            <Button variant="outline" onClick={() => setShowChangePassword(!showChangePassword)}>
+              <Icon name="Key" size={16} className="mr-2" />
+              Сменить пароль
+            </Button>
             <Button variant="outline" onClick={handleLogout}>
               <Icon name="LogOut" size={16} className="mr-2" />
               Выйти
@@ -121,6 +170,78 @@ const Admin = () => {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
+        {showChangePassword && (
+          <div className="mb-8 bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              Изменить пароль
+            </h2>
+            <form onSubmit={handleChangePassword} className="max-w-md space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Текущий пароль
+                </label>
+                <input
+                  type="password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Новый пароль
+                </label>
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white"
+                  required
+                  minLength={8}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Подтвердите новый пароль
+                </label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white"
+                  required
+                />
+              </div>
+              {changePasswordError && (
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  {changePasswordError}
+                </p>
+              )}
+              {changePasswordSuccess && (
+                <p className="text-sm text-green-600 dark:text-green-400">
+                  {changePasswordSuccess}
+                </p>
+              )}
+              <div className="flex gap-3">
+                <Button type="submit">
+                  Сохранить
+                </Button>
+                <Button type="button" variant="outline" onClick={() => {
+                  setShowChangePassword(false);
+                  setCurrentPassword('');
+                  setNewPassword('');
+                  setConfirmPassword('');
+                  setChangePasswordError('');
+                  setChangePasswordSuccess('');
+                }}>
+                  Отмена
+                </Button>
+              </div>
+            </form>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-3 mb-4">
