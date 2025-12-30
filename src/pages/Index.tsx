@@ -233,7 +233,7 @@ const Index = () => {
 
         <div className="flex pt-[73px]">
           {/* Левая навигация */}
-          <aside className="fixed left-0 top-[73px] bottom-0 w-64 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
+          <aside className="fixed left-0 top-[73px] bottom-0 w-72 bg-white dark:bg-[#1a1a1a] border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
             <nav className="px-3 py-4">
               {menuItems.map((item) => {
                 if (item.isSubitem) {
@@ -321,7 +321,7 @@ const Index = () => {
           </aside>
 
           {/* Основной контент */}
-          <main className="ml-64 flex-1 p-8">
+          <main className="ml-72 flex-1 p-8">
             <div className="max-w-4xl mx-auto">
               <div className="mb-8">
                 <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -340,7 +340,7 @@ const Index = () => {
           </main>
         </div>
 
-        <footer className="ml-64 py-12 border-t border-gray-200 dark:border-gray-800">
+        <footer className="ml-72 py-12 border-t border-gray-200 dark:border-gray-800">
           <div className="max-w-4xl mx-auto px-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <span className="font-bold text-xl text-gray-900 dark:text-white">HEY, STORE!</span>
