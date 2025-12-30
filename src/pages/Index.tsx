@@ -15,22 +15,30 @@ const Index = () => {
     {
       id: 'vpn',
       title: 'Бесплатный VPN',
-      icon: 'Shield'
+      icon: 'Shield',
+      x: 120,
+      y: 80
     },
     {
       id: 'kyc',
       title: 'Верификация KYC',
-      icon: 'UserCheck'
+      icon: 'UserCheck',
+      x: 880,
+      y: 80
     },
     {
       id: 'esim',
       title: 'Мировые eSIM',
-      icon: 'Radio'
+      icon: 'Radio',
+      x: 120,
+      y: 530
     },
     {
       id: 'business',
       title: 'IT для бизнеса',
-      icon: 'Lightbulb'
+      icon: 'Lightbulb',
+      x: 880,
+      y: 530
     }
   ];
 
@@ -80,6 +88,62 @@ const Index = () => {
                     </filter>
                   </defs>
                   
+                  <line 
+                    x1="500" 
+                    y1="300" 
+                    x2="120" 
+                    y2="80" 
+                    stroke="url(#lineGradient1)" 
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    filter="url(#glow)"
+                    opacity="0"
+                  >
+                    <animate attributeName="opacity" from="0" to="1" dur="1s" fill="freeze" />
+                    <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="1.5s" fill="freeze" />
+                  </line>
+                  <line 
+                    x1="500" 
+                    y1="300" 
+                    x2="880" 
+                    y2="80" 
+                    stroke="url(#lineGradient1)" 
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    filter="url(#glow)"
+                    opacity="0"
+                  >
+                    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="0.3s" fill="freeze" />
+                    <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="1.5s" begin="0.3s" fill="freeze" />
+                  </line>
+                  <line 
+                    x1="500" 
+                    y1="300" 
+                    x2="120" 
+                    y2="530" 
+                    stroke="url(#lineGradient1)" 
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    filter="url(#glow)"
+                    opacity="0"
+                  >
+                    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="0.6s" fill="freeze" />
+                    <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="1.5s" begin="0.6s" fill="freeze" />
+                  </line>
+                  <line 
+                    x1="500" 
+                    y1="300" 
+                    x2="880" 
+                    y2="530" 
+                    stroke="url(#lineGradient1)" 
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    filter="url(#glow)"
+                    opacity="0"
+                  >
+                    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="0.9s" fill="freeze" />
+                    <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="1.5s" begin="0.9s" fill="freeze" />
+                  </line>
                   
                   <g transform="translate(300, 180)">
                     <svg width="400" height="200" viewBox="0 0 974.28 376.03" preserveAspectRatio="xMidYMid meet">
@@ -105,95 +169,63 @@ const Index = () => {
                     </svg>
                   </g>
                   
-                  {services.map((service, index) => {
-                    const angle = (index * 90) * (Math.PI / 180);
-                    const radius = 240;
-                    const centerX = 500;
-                    const centerY = 300;
-                    const x = centerX + radius * Math.cos(angle);
-                    const y = centerY + radius * Math.sin(angle);
-                    
-                    return (
-                      <g key={service.id}>
-                        <g>
-                          <animateTransform
-                            attributeName="transform"
-                            type="rotate"
-                            from={`0 ${centerX} ${centerY}`}
-                            to={`360 ${centerX} ${centerY}`}
-                            dur="60s"
-                            repeatCount="indefinite"
-                          />
-                          
-                          <circle
-                            cx={x}
-                            cy={y}
-                            r="70"
-                            fill="#f3f4f6"
-                            className="dark:fill-[#374151] cursor-pointer transition-all duration-500 hover:fill-[#e5e7eb] dark:hover:fill-[#4b5563]"
-                            stroke="url(#lineGradient1)"
-                            strokeWidth="3"
-                            filter="url(#glow)"
-                            opacity="0"
-                          >
-                            <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="1.2s" fill="freeze" />
-                            <animate attributeName="r" from="0" to="70" dur="0.6s" begin="1.2s" fill="freeze" />
-                          </circle>
-                          <circle
-                            cx={x}
-                            cy={y}
-                            r="28"
-                            fill="#e5e7eb"
-                            className="dark:fill-[#4b5563] transition-all duration-300"
-                            stroke="#00adee"
-                            strokeWidth="2"
-                            opacity="0"
-                          >
-                            <animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.5s" fill="freeze" />
-                            <animate attributeName="r" from="0" to="28" dur="0.4s" begin="1.5s" fill="freeze" />
-                          </circle>
-                          
-                          <g>
-                            <animateTransform
-                              attributeName="transform"
-                              type="rotate"
-                              from={`0 ${x} ${y}`}
-                              to={`-360 ${x} ${y}`}
-                              dur="60s"
-                              repeatCount="indefinite"
-                            />
-                            
-                            <foreignObject 
-                              x={x - 14} 
-                              y={y - 14} 
-                              width="28" 
-                              height="28"
-                              style={{ opacity: 0 }}
-                            >
-                              <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.6s" fill="freeze" />
-                              <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full flex items-center justify-center">
-                                <Icon name={service.icon} size={20} className="text-gray-900 dark:text-white" />
-                              </div>
-                            </foreignObject>
-                            
-                            <text
-                              x={x}
-                              y={y + 95}
-                              textAnchor="middle"
-                              fontSize="16"
-                              fontWeight="600"
-                              className="fill-gray-900 dark:fill-white"
-                              style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}
-                              opacity="0"
-                            >
-                              <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.8s" fill="freeze" />
-                              {service.title}
-                            </text>
-                          </g>
-                        </g>
-                      </g>
-                    );
-                  })}
+                  {services.map((service) => (
+                    <g key={service.id}>
+                      <circle
+                        cx={service.x}
+                        cy={service.y}
+                        r="70"
+                        fill="#f3f4f6"
+                        className="dark:fill-[#374151] cursor-pointer transition-all duration-500 hover:fill-[#e5e7eb] dark:hover:fill-[#4b5563]"
+                        stroke="url(#lineGradient1)"
+                        strokeWidth="3"
+                        filter="url(#glow)"
+                        opacity="0"
+                      >
+                        <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="1.2s" fill="freeze" />
+                        <animate attributeName="r" from="0" to="70" dur="0.6s" begin="1.2s" fill="freeze" />
+                      </circle>
+                      <circle
+                        cx={service.x}
+                        cy={service.y}
+                        r="28"
+                        fill="#e5e7eb"
+                        className="dark:fill-[#4b5563] transition-all duration-300"
+                        stroke="#00adee"
+                        strokeWidth="2"
+                        opacity="0"
+                      >
+                        <animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.5s" fill="freeze" />
+                        <animate attributeName="r" from="0" to="28" dur="0.4s" begin="1.5s" fill="freeze" />
+                      </circle>
+                      <foreignObject 
+                        x={service.x - 14} 
+                        y={service.y - 14} 
+                        width="28" 
+                        height="28"
+                        opacity="0"
+                      >
+                        <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.6s" fill="freeze" />
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Icon name={service.icon} size={20} className="text-gray-900 dark:text-white" />
+                        </div>
+                      </foreignObject>
+                      
+                      <text
+                        x={service.x}
+                        y={service.y + 95}
+                        textAnchor="middle"
+                        fontSize="16"
+                        fontWeight="600"
+                        className="fill-gray-900 dark:fill-white"
+                        style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}
+                        opacity="0"
+                      >
+                        <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin="1.8s" fill="freeze" />
+                        {service.title}
+                      </text>
+                    </g>
+                  ))}
                 </svg>
               </div>
 
