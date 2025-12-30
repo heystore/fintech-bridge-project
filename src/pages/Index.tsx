@@ -41,13 +41,29 @@ const Index = () => {
   const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem('heystore_services');
-    if (stored) {
-      setServices(JSON.parse(stored));
-    } else {
-      localStorage.setItem('heystore_services', JSON.stringify(defaultServices));
-      setServices(defaultServices);
-    }
+    const loadServices = () => {
+      const stored = localStorage.getItem('heystore_services');
+      if (stored) {
+        const parsedServices = JSON.parse(stored);
+        console.log('Loaded services from localStorage:', parsedServices);
+        setServices(parsedServices);
+      } else {
+        localStorage.setItem('heystore_services', JSON.stringify(defaultServices));
+        setServices(defaultServices);
+      }
+    };
+
+    loadServices();
+
+    // Listen for storage changes from admin panel
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'heystore_services') {
+        loadServices();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const toggleDarkMode = () => {
