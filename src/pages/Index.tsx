@@ -259,7 +259,7 @@ const Index = () => {
                         }
                       `}
                     >
-                      <div className="w-7 flex items-center justify-center flex-shrink-0">
+                      <div className="w-5 flex items-center justify-start flex-shrink-0">
                         <Icon name={item.icon} size={18} />
                       </div>
                       <span className="text-sm font-medium ml-2.5 whitespace-nowrap">{item.title}</span>
@@ -283,11 +283,11 @@ const Index = () => {
                         }
                       `}
                     >
-                      <div className="w-7 flex items-center justify-center flex-shrink-0">
+                      <div className="w-5 flex items-center justify-start flex-shrink-0">
                         <Icon name={item.icon} size={20} />
                       </div>
-                      <span className="font-medium flex-1 ml-2.5 whitespace-nowrap">{item.title}</span>
-                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                      <span className="font-medium ml-2.5 whitespace-nowrap flex-1 min-w-0">{item.title}</span>
+                      <div className="flex items-center gap-1.5 flex-shrink-0 ml-auto">
                         {item.badge && (
                           <span className="px-1.5 py-0.5 text-xs font-semibold bg-blue-500 text-white rounded">
                             {item.badge}
@@ -319,7 +319,7 @@ const Index = () => {
                               }
                             `}
                           >
-                            <div className="w-7 flex items-center justify-center flex-shrink-0">
+                            <div className="w-5 flex items-center justify-start flex-shrink-0">
                               <Icon name={subitem.icon} size={18} />
                             </div>
                             <span className="text-sm ml-2.5 whitespace-nowrap">{subitem.title}</span>
