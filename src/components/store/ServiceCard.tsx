@@ -33,9 +33,11 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
         }
       `}
     >
+      <div className="absolute inset-0 bg-white dark:bg-gray-800" />
+      
       {service.backgroundImage && (
         <div 
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-40 dark:opacity-30"
           style={{
             backgroundImage: `url(${service.backgroundImage})`,
             backgroundSize: 'cover',
@@ -45,7 +47,7 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
         />
       )}
       
-      <div className={`relative z-10 p-5 flex flex-col h-full ${service.backgroundImage ? 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm' : 'bg-white dark:bg-gray-800'}`}>
+      <div className="relative z-10 p-5 flex flex-col h-full">
         <div className="flex items-start justify-between mb-3">
           {service.logoSvg ? (
             <div className="w-14 h-14 rounded-lg bg-white dark:bg-gray-900 shadow-sm border border-gray-100 dark:border-gray-700 p-2 flex items-center justify-center">

@@ -173,10 +173,10 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Фоновое изображение (Соотношение 16:9, примерно 400x225)
+                  Фоновое изображение (любой формат)
                 </label>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                  Рекомендуется квадратное или горизонтальное изображение. Будет отображаться полупрозрачным фоном.
+                  Изображение будет растянуто на всю карточку с яркостью 40%. Используйте яркие, контрастные изображения для лучшего эффекта.
                 </p>
                 <input
                   type="file"
@@ -186,12 +186,19 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                 />
                 {backgroundPreview && (
                   <div className="mt-2 relative">
-                    <div className="w-full aspect-video bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden relative">
-                      <img src={backgroundPreview} alt="Background preview" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-white/30 dark:bg-gray-800/20 flex items-center justify-center">
-                        <span className="text-xs font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 px-2 py-1 rounded">
-                          Так будет выглядеть на карточке
-                        </span>
+                    <div className="w-full aspect-video bg-white dark:bg-gray-800 rounded-lg overflow-hidden relative">
+                      <div 
+                        className="absolute inset-0 opacity-40 dark:opacity-30"
+                        style={{
+                          backgroundImage: `url(${backgroundPreview})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                        }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="bg-black/60 text-white text-xs px-3 py-1.5 rounded-full font-medium">
+                          Превью как на карточке (40% яркость)
+                        </div>
                       </div>
                     </div>
                     <button
@@ -200,7 +207,7 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                         setBackgroundPreview(undefined);
                         setFormData({ ...formData, backgroundImage: undefined });
                       }}
-                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 z-10"
                     >
                       <Icon name="X" size={16} />
                     </button>
