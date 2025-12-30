@@ -203,48 +203,40 @@ const Index = () => {
             key={service.id}
             onClick={() => setSelectedService(service.id)}
             className={`
-              group relative overflow-hidden rounded-2xl aspect-[1.586/1] 
-              transition-all duration-200 text-left
-              hover:shadow-2xl hover:-translate-y-1
+              group relative bg-white dark:bg-gray-800 rounded-xl p-5 
+              border-2 transition-all duration-200 text-left
+              hover:shadow-lg hover:-translate-y-0.5
               ${selectedService === service.id 
-                ? 'shadow-2xl ring-2 ring-blue-500' 
-                : 'shadow-lg hover:shadow-xl'
+                ? 'border-blue-500 shadow-lg' 
+                : 'border-gray-200 dark:border-gray-700 hover:border-blue-300'
               }
             `}
-            style={{
-              background: selectedService === service.id
-                ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-            }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-            
-            <div className="relative h-full flex flex-col justify-between p-5">
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <Icon name={service.icon} size={32} className="text-white/90" />
-                  <span className="text-xs font-medium text-white/70 uppercase tracking-wider">
-                    {service.type}
-                  </span>
-                </div>
-                
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {service.name}
-                </h3>
-                
-                <p className="text-sm text-white/80 line-clamp-2">
-                  {service.description}
-                </p>
+            <div className="flex items-start justify-between mb-3">
+              <div className="w-11 h-11 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center">
+                <Icon name={service.icon} size={22} className="text-blue-600 dark:text-blue-400" />
               </div>
-              
-              <div className="flex items-end justify-between">
-                <span className="text-2xl font-bold text-white">
-                  {service.price}
-                </span>
-                <div className="flex items-center text-sm font-medium text-white/90">
-                  {service.cta}
-                  <Icon name="ArrowRight" size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
+            </div>
+            
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+              {service.name}
+            </h3>
+            
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+              {service.type}
+            </p>
+            
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 min-h-[36px] line-clamp-2">
+              {service.description}
+            </p>
+            
+            <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-700">
+              <span className="text-base font-bold text-gray-900 dark:text-white">
+                {service.price}
+              </span>
+              <div className="flex items-center text-sm font-medium text-blue-600 dark:text-blue-400">
+                {service.cta}
+                <Icon name="ArrowRight" size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
           </button>
