@@ -16,29 +16,29 @@ const Index = () => {
       id: 'vpn',
       title: 'Бесплатный VPN',
       icon: 'Shield',
-      x: '12%',
-      y: '20%'
+      x: 120,
+      y: 120
     },
     {
       id: 'kyc',
       title: 'Верификация КУС',
       icon: 'UserCheck',
-      x: '88%',
-      y: '20%'
+      x: 880,
+      y: 120
     },
     {
       id: 'esim',
       title: 'Мировые eSIM',
       icon: 'Radio',
-      x: '12%',
-      y: '80%'
+      x: 120,
+      y: 580
     },
     {
       id: 'business',
       title: 'IT для бизнеса',
       icon: 'Lightbulb',
-      x: '88%',
-      y: '80%'
+      x: 880,
+      y: 580
     }
   ];
 
@@ -64,8 +64,8 @@ const Index = () => {
         <main className="pt-20">
           <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16">
             <div className="container mx-auto px-4 relative z-10">
-              <div className="relative max-w-6xl mx-auto h-[800px]">
-                <svg width="100%" height="100%" className="absolute inset-0" preserveAspectRatio="xMidYMid meet">
+              <div className="relative max-w-6xl mx-auto h-[700px]">
+                <svg width="100%" height="100%" viewBox="0 0 1000 700" className="absolute inset-0">
                   <defs>
                     <filter id="glow">
                       <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -77,47 +77,47 @@ const Index = () => {
                   </defs>
                   
                   <line 
-                    x1="50%" 
-                    y1="50%" 
-                    x2="12%" 
-                    y2="20%" 
+                    x1="500" 
+                    y1="350" 
+                    x2="120" 
+                    y2="120" 
                     stroke="#2C3E50" 
                     strokeWidth="2.5"
                     className="dark:stroke-white/50"
                     strokeLinecap="round"
                   />
                   <line 
-                    x1="50%" 
-                    y1="50%" 
-                    x2="88%" 
-                    y2="20%" 
+                    x1="500" 
+                    y1="350" 
+                    x2="880" 
+                    y2="120" 
                     stroke="#2C3E50" 
                     strokeWidth="2.5"
                     className="dark:stroke-white/50"
                     strokeLinecap="round"
                   />
                   <line 
-                    x1="50%" 
-                    y1="50%" 
-                    x2="12%" 
-                    y2="80%" 
+                    x1="500" 
+                    y1="350" 
+                    x2="120" 
+                    y2="580" 
                     stroke="#2C3E50" 
                     strokeWidth="2.5"
                     className="dark:stroke-white/50"
                     strokeLinecap="round"
                   />
                   <line 
-                    x1="50%" 
-                    y1="50%" 
-                    x2="88%" 
-                    y2="80%" 
+                    x1="500" 
+                    y1="350" 
+                    x2="880" 
+                    y2="580" 
                     stroke="#2C3E50" 
                     strokeWidth="2.5"
                     className="dark:stroke-white/50"
                     strokeLinecap="round"
                   />
                   
-                  <g transform="translate(50%, 50%) translate(-200, -100)">
+                  <g transform="translate(300, 280)">
                     <svg width="400" height="200" viewBox="0 0 974.28 376.03" preserveAspectRatio="xMidYMid meet">
                       <defs>
                         <style>
@@ -164,8 +164,8 @@ const Index = () => {
                         className="dark:stroke-white/60"
                       />
                       <foreignObject 
-                        x={`calc(${service.x} - 14px)`} 
-                        y={`calc(${service.y} - 14px)`} 
+                        x={service.x - 14} 
+                        y={service.y - 14} 
                         width="28" 
                         height="28"
                       >
@@ -173,25 +173,19 @@ const Index = () => {
                           <Icon name={service.icon} size={20} className="text-[#2C3E50] dark:text-white" />
                         </div>
                       </foreignObject>
+                      
+                      <text
+                        x={service.x}
+                        y={service.y + 95}
+                        textAnchor="middle"
+                        className="text-sm md:text-base font-medium fill-[#2C3E50] dark:fill-white"
+                        style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}
+                      >
+                        {service.title}
+                      </text>
                     </g>
                   ))}
                 </svg>
-                
-                {services.map((service, index) => (
-                  <div
-                    key={service.id}
-                    className="absolute transform -translate-x-1/2 translate-y-20 animate-fade-in pointer-events-none"
-                    style={{ 
-                      left: service.x, 
-                      top: service.y,
-                      animationDelay: `${index * 100}ms`
-                    }}
-                  >
-                    <p className="text-sm md:text-base font-medium text-[#2C3E50] dark:text-white text-center max-w-[140px] leading-tight">
-                      {service.title}
-                    </p>
-                  </div>
-                ))}
               </div>
 
               <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '400ms' }}>
