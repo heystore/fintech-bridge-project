@@ -176,7 +176,7 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                   Фоновое изображение (любой формат)
                 </label>
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                  Изображение будет растянуто на всю карточку с яркостью 40%. Используйте яркие, контрастные изображения для лучшего эффекта.
+                  Изображение будет растянуто на всю карточку в полной яркости. Нижняя полоска с ценой останется белой.
                 </p>
                 <input
                   type="file"
@@ -188,7 +188,7 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                   <div className="mt-2 relative">
                     <div className="w-full aspect-video bg-white dark:bg-gray-800 rounded-lg overflow-hidden relative">
                       <div 
-                        className="absolute inset-0 opacity-40 dark:opacity-30"
+                        className="absolute inset-0"
                         style={{
                           backgroundImage: `url(${backgroundPreview})`,
                           backgroundSize: 'cover',
@@ -197,7 +197,7 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                       />
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <div className="bg-black/60 text-white text-xs px-3 py-1.5 rounded-full font-medium">
-                          Превью как на карточке (40% яркость)
+                          Превью (100% яркость)
                         </div>
                       </div>
                     </div>

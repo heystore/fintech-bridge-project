@@ -43,7 +43,7 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
       
       {service.backgroundImage && (
         <div 
-          className="absolute inset-0 opacity-40 dark:opacity-30"
+          className="absolute inset-0"
           style={{
             backgroundImage: `url(${service.backgroundImage})`,
             backgroundSize: 'cover',
@@ -78,7 +78,7 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
           {service.description}
         </p>
         
-        <div className="flex items-center justify-between pt-2 mt-auto border-t border-gray-100 dark:border-gray-700">
+        <div className="flex items-center justify-between pt-2 mt-auto border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 -mx-5 -mb-5 px-5 pb-5">
           <span className="text-base font-bold text-gray-900 dark:text-white">
             {service.price}
           </span>
