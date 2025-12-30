@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import Sidebar from '@/components/store/Sidebar';
+import FilterSidebar from '@/components/store/FilterSidebar';
 import ServiceCard from '@/components/store/ServiceCard';
 import VPNSection from '@/components/store/VPNSection';
 import ESIMSection from '@/components/store/ESIMSection';
@@ -241,6 +242,8 @@ const Index = () => {
           {renderContent()}
         </div>
       </main>
+
+      {(activeSection.includes('kyc')) && <FilterSidebar />}
     </div>
   );
 };
