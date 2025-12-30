@@ -173,8 +173,11 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Фоновое изображение (400x250 рекомендуется)
+                  Фоновое изображение (Соотношение 16:9, примерно 400x225)
                 </label>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                  Рекомендуется квадратное или горизонтальное изображение. Будет отображаться полупрозрачным фоном.
+                </p>
                 <input
                   type="file"
                   accept="image/*"
@@ -183,7 +186,14 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                 />
                 {backgroundPreview && (
                   <div className="mt-2 relative">
-                    <img src={backgroundPreview} alt="Background preview" className="w-full h-32 object-cover rounded-lg" />
+                    <div className="w-full aspect-video bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden relative">
+                      <img src={backgroundPreview} alt="Background preview" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-white/30 dark:bg-gray-800/20 flex items-center justify-center">
+                        <span className="text-xs font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 px-2 py-1 rounded">
+                          Так будет выглядеть на карточке
+                        </span>
+                      </div>
+                    </div>
                     <button
                       type="button"
                       onClick={() => {

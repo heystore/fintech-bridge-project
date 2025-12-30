@@ -227,7 +227,7 @@ const Index = () => {
             key={service.id}
             onClick={() => setSelectedService(service.id)}
             className={`
-              group relative rounded-xl overflow-hidden
+              group relative rounded-xl overflow-hidden h-[280px] flex flex-col
               border-2 transition-all duration-200 text-left
               hover:shadow-lg hover:-translate-y-0.5
               ${selectedService === service.id 
@@ -238,19 +238,17 @@ const Index = () => {
           >
             {service.backgroundImage && (
               <div 
-                className="absolute inset-0"
+                className="absolute inset-0 opacity-30 dark:opacity-20"
                 style={{
                   backgroundImage: `url(${service.backgroundImage})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
                 }}
-              >
-                <div className="absolute inset-0 bg-white/85 dark:bg-gray-800/85 backdrop-blur-[2px]" />
-              </div>
+              />
             )}
             
-            <div className={`relative z-10 p-5 ${!service.backgroundImage ? 'bg-white dark:bg-gray-800' : ''}`}>
+            <div className={`relative z-10 p-5 flex flex-col h-full ${!service.backgroundImage ? 'bg-white dark:bg-gray-800' : 'bg-white dark:bg-gray-800'}`}>
               <div className="flex items-start justify-between mb-3">
                 {service.logoSvg ? (
                   <div className="w-14 h-14 rounded-lg bg-white dark:bg-gray-900 shadow-sm border border-gray-100 dark:border-gray-700 p-2 flex items-center justify-center">
@@ -271,11 +269,11 @@ const Index = () => {
                 {service.type}
               </p>
               
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 min-h-[36px] line-clamp-2">
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 flex-1 line-clamp-2">
                 {service.description}
               </p>
               
-              <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-700">
+              <div className="flex items-center justify-between pt-2 mt-auto border-t border-gray-100 dark:border-gray-700">
                 <span className="text-base font-bold text-gray-900 dark:text-white">
                   {service.price}
                 </span>
