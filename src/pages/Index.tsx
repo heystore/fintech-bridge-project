@@ -12,6 +12,23 @@ const Index = () => {
     document.documentElement.classList.toggle('dark');
   };
 
+  const vpnCountries = [
+    { flag: '🇪🇸', name: 'Испания', premium: false },
+    { flag: '🇩🇪', name: 'Германия', premium: true },
+    { flag: '🇮🇹', name: 'Италия', premium: true },
+    { flag: '🇸🇪', name: 'Швеция', premium: true },
+    { flag: '🇬🇧', name: 'Великобритания', premium: true },
+    { flag: '🇮🇱', name: 'Израиль', premium: true },
+    { flag: '🇸🇬', name: 'Сингапур', premium: true }
+  ];
+
+  const esimCountries = [
+    { flag: '🇬🇧', name: 'Великобритания', price: '₽499/мес' },
+    { flag: '🇦🇺', name: 'Австралия', price: '₽599/мес' },
+    { flag: '🇨🇦', name: 'Канада', price: '₽549/мес' },
+    { flag: '🇺🇸', name: 'США', price: '₽699/мес' }
+  ];
+
   const menuItems = [
     {
       id: 'kyc',
@@ -54,6 +71,104 @@ const Index = () => {
     } else {
       setExpandedSections([...expandedSections, id]);
     }
+  };
+
+  const renderContent = () => {
+    if (activeSection === 'vpn') {
+      return (
+        <div className="space-y-6">
+          <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+            <p className="text-blue-900 dark:text-blue-100 text-sm">
+              Защищённое соединение с чистыми IP-адресами для доступа к глобальным сервисам
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {vpnCountries.map((country) => (
+              <button
+                key={country.name}
+                className="w-full flex items-center justify-between px-6 py-4 bg-gray-800 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-800 rounded-xl transition-all duration-200"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="text-4xl">{country.flag}</span>
+                  <span className="text-lg font-medium text-white">{country.name}</span>
+                </div>
+                {country.premium && (
+                  <span className="text-2xl">💎</span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 text-center">
+            <Icon name="Gem" size={48} className="mx-auto mb-3 text-blue-500" />
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              Premium доступ
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              Получите доступ ко всем серверам с символом 💎
+            </p>
+            <Button className="w-full">
+              Подключить Premium
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
+    if (activeSection === 'esim') {
+      return (
+        <div className="space-y-6">
+          <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+            <p className="text-blue-900 dark:text-blue-100 text-sm">
+              Зарубежные номера телефонов для регистрации в международных сервисах
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {esimCountries.map((country) => (
+              <div
+                key={country.name}
+                className="flex flex-col items-center justify-center px-6 py-8 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 cursor-pointer border-2 border-transparent hover:border-blue-500"
+              >
+                <span className="text-6xl mb-4">{country.flag}</span>
+                <span className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {country.name}
+                </span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {country.price}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white">
+            <h3 className="text-xl font-bold mb-2">Скоро: глобальный eSIM</h3>
+            <p className="text-sm opacity-90">
+              Единая SIM-карта для всех стран мира
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-center">
+            <Icon 
+              name={menuItems.find(m => m.id === activeSection)?.icon || 
+                   menuItems.flatMap(m => m.submenu || []).find(s => s.id === activeSection)?.icon || 'Circle'} 
+              size={64} 
+              className="mx-auto mb-4 text-gray-400 dark:text-gray-600"
+            />
+            <p className="text-gray-500 dark:text-gray-400">
+              Контент раздела в разработке
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -168,26 +283,14 @@ const Index = () => {
                   {menuItems.find(m => m.id === activeSection)?.title || 
                    menuItems.flatMap(m => m.submenu || []).find(s => s.id === activeSection)?.title}
                 </h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">
-                  Цифровой мост для пользователей и предпринимателей из СНГ в глобальную финансовую экосистему
-                </p>
+                {activeSection !== 'vpn' && activeSection !== 'esim' && (
+                  <p className="text-lg text-gray-600 dark:text-gray-400">
+                    Цифровой мост для пользователей и предпринимателей из СНГ в глобальную финансовую экосистему
+                  </p>
+                )}
               </div>
 
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
-                <div className="flex items-center justify-center h-64">
-                  <div className="text-center">
-                    <Icon 
-                      name={menuItems.find(m => m.id === activeSection)?.icon || 
-                           menuItems.flatMap(m => m.submenu || []).find(s => s.id === activeSection)?.icon || 'Circle'} 
-                      size={64} 
-                      className="mx-auto mb-4 text-gray-400 dark:text-gray-600"
-                    />
-                    <p className="text-gray-500 dark:text-gray-400">
-                      Контент раздела в разработке
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {renderContent()}
             </div>
           </main>
         </div>
