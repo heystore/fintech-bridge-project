@@ -35,7 +35,6 @@ const Index = () => {
       title: 'Активация сервисов',
       icon: 'UserCheck',
       hasSubmenu: true,
-      description: 'Финтехи и банки • Криптобиржи • Платформы',
       submenu: [
         { id: 'kyc-fintech', title: 'Финтехи и банки', icon: 'Building' },
         { id: 'kyc-crypto', title: 'Криптобиржи', icon: 'Bitcoin' },
@@ -44,12 +43,18 @@ const Index = () => {
     },
     {
       id: 'vpn',
-      title: 'Бесплатный VPN',
+      title: 'Премиум VPN',
+      badge: 'FREE',
       icon: 'Shield',
       hasSubmenu: true,
-      description: '🇪🇸 🇩🇪 🇮🇹 🇸🇪 🇬🇧 🇮🇱 🇸🇬',
       submenu: [
-        { id: 'vpn-countries', title: '🇪🇸 🇩🇪 🇮🇹 🇸🇪 🇬🇧 🇮🇱 🇸🇬', icon: 'Globe' }
+        { id: 'vpn-es', title: '🇪🇸 Испания', icon: 'MapPin' },
+        { id: 'vpn-de', title: '🇩🇪 Германия', icon: 'MapPin' },
+        { id: 'vpn-it', title: '🇮🇹 Италия', icon: 'MapPin' },
+        { id: 'vpn-se', title: '🇸🇪 Швеция', icon: 'MapPin' },
+        { id: 'vpn-gb', title: '🇬🇧 Великобритания', icon: 'MapPin' },
+        { id: 'vpn-il', title: '🇮🇱 Израиль', icon: 'MapPin' },
+        { id: 'vpn-sg', title: '🇸🇬 Сингапур', icon: 'MapPin' }
       ]
     },
     {
@@ -57,9 +62,11 @@ const Index = () => {
       title: 'Мировые eSIM',
       icon: 'Smartphone',
       hasSubmenu: true,
-      description: '🇬🇧 🇦🇺 🇨🇦 🇺🇸',
       submenu: [
-        { id: 'esim-countries', title: '🇬🇧 🇦🇺 🇨🇦 🇺🇸', icon: 'Globe' }
+        { id: 'esim-gb', title: '🇬🇧 Великобритания', price: '+1', icon: 'Phone' },
+        { id: 'esim-au', title: '🇦🇺 Австралия', price: '+61', icon: 'Phone' },
+        { id: 'esim-ca', title: '🇨🇦 Канада', price: '+1', icon: 'Phone' },
+        { id: 'esim-us', title: '🇺🇸 США', price: '+1', icon: 'Phone' }
       ]
     },
     {
@@ -269,9 +276,14 @@ const Index = () => {
                       `}
                     >
                       <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
                           <Icon name={item.icon} size={20} />
                           <span className="font-medium">{item.title}</span>
+                          {item.badge && (
+                            <span className="px-2 py-0.5 text-xs font-medium bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
+                              {item.badge}
+                            </span>
+                          )}
                         </div>
                         {item.hasSubmenu && (
                           <Icon 
@@ -281,11 +293,6 @@ const Index = () => {
                           />
                         )}
                       </div>
-                      {item.description && (
-                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 ml-8">
-                          {item.description}
-                        </div>
-                      )}
                     </button>
 
                     {/* Подменю */}
@@ -296,7 +303,7 @@ const Index = () => {
                             key={subitem.id}
                             onClick={() => setActiveSection(subitem.id)}
                             className={`
-                              w-full flex items-center gap-3 px-4 py-2 rounded-lg
+                              w-full flex items-center justify-between px-4 py-2 rounded-lg
                               transition-all duration-200
                               ${activeSection === subitem.id
                                 ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
@@ -304,8 +311,15 @@ const Index = () => {
                               }
                             `}
                           >
-                            <Icon name={subitem.icon} size={16} />
-                            <span className="text-sm">{subitem.title}</span>
+                            <div className="flex items-center gap-2">
+                              <Icon name={subitem.icon} size={16} />
+                              <span className="text-sm">{subitem.title}</span>
+                            </div>
+                            {subitem.price && (
+                              <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                                {subitem.price}
+                              </span>
+                            )}
                           </button>
                         ))}
                       </div>
