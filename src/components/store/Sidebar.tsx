@@ -17,7 +17,6 @@ interface SidebarProps {
   expandedSections: string[];
   onSectionChange: (id: string) => void;
   onToggleSection: (id: string) => void;
-  onAdminClick: () => void;
 }
 
 const Sidebar = ({
@@ -25,8 +24,7 @@ const Sidebar = ({
   activeSection,
   expandedSections,
   onSectionChange,
-  onToggleSection,
-  onAdminClick
+  onToggleSection
 }: SidebarProps) => {
   return (
     <aside className="w-80 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
@@ -103,17 +101,6 @@ const Sidebar = ({
           </div>
         ))}
       </nav>
-
-      <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-        <Button
-          variant="outline"
-          className="w-full justify-start"
-          onClick={onAdminClick}
-        >
-          <Icon name="Settings" size={18} className="mr-2" />
-          Админ-панель
-        </Button>
-      </div>
     </aside>
   );
 };

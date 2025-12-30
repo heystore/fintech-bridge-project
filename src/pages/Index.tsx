@@ -209,7 +209,6 @@ const Index = () => {
         expandedSections={expandedSections}
         onSectionChange={setActiveSection}
         onToggleSection={toggleSection}
-        onAdminClick={() => navigate('/admin')}
       />
 
       <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">

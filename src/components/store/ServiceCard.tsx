@@ -20,6 +20,12 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
+  console.log(`ServiceCard [${service.name}]:`, {
+    hasBackground: !!service.backgroundImage,
+    backgroundLength: service.backgroundImage?.length,
+    backgroundPreview: service.backgroundImage?.substring(0, 50)
+  });
+
   return (
     <button
       onClick={onClick}
