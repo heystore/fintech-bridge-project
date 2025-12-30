@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import ArnoldMascot from '@/components/ArnoldMascot';
 
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -14,34 +15,30 @@ const Index = () => {
     {
       id: 'vpn',
       title: 'Бесплатный VPN',
-      position: 'top-left',
       icon: 'Shield',
-      x: '20%',
-      y: '35%'
+      x: '15%',
+      y: '30%'
     },
     {
       id: 'kyc',
       title: 'Верификация КУС',
-      position: 'top-right',
       icon: 'UserCheck',
-      x: '80%',
-      y: '35%'
+      x: '85%',
+      y: '30%'
     },
     {
       id: 'esim',
       title: 'Мировые eSIM',
-      position: 'bottom-left',
       icon: 'Radio',
-      x: '20%',
-      y: '65%'
+      x: '15%',
+      y: '70%'
     },
     {
       id: 'business',
       title: 'IT для бизнеса',
-      position: 'bottom-right',
       icon: 'Lightbulb',
-      x: '80%',
-      y: '65%'
+      x: '85%',
+      y: '70%'
     }
   ];
 
@@ -67,91 +64,119 @@ const Index = () => {
         <main className="pt-20">
           <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16">
             <div className="container mx-auto px-4 relative z-10">
-              <div className="relative max-w-7xl mx-auto">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] pointer-events-none">
-                  <svg width="100%" height="100%" className="absolute inset-0">
-                    <line 
-                      x1="50%" 
-                      y1="50%" 
-                      x2="10%" 
-                      y2="20%" 
-                      stroke="#2C3E50" 
-                      strokeWidth="2.5"
-                      className="dark:stroke-white/40"
-                      strokeLinecap="round"
-                    />
-                    <line 
-                      x1="50%" 
-                      y1="50%" 
-                      x2="90%" 
-                      y2="20%" 
-                      stroke="#2C3E50" 
-                      strokeWidth="2.5"
-                      className="dark:stroke-white/40"
-                      strokeLinecap="round"
-                    />
-                    <line 
-                      x1="50%" 
-                      y1="50%" 
-                      x2="10%" 
-                      y2="80%" 
-                      stroke="#2C3E50" 
-                      strokeWidth="2.5"
-                      className="dark:stroke-white/40"
-                      strokeLinecap="round"
-                    />
-                    <line 
-                      x1="50%" 
-                      y1="50%" 
-                      x2="90%" 
-                      y2="80%" 
-                      stroke="#2C3E50" 
-                      strokeWidth="2.5"
-                      className="dark:stroke-white/40"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-
-                <div className="flex items-center justify-center mb-8 relative">
-                  <div className="relative">
-                    <img 
-                      src="https://cdn.poehali.dev/files/2025-12-30 12.11.24.jpg"
-                      alt="Arnold Mascot"
-                      className="w-full max-w-4xl h-auto object-contain drop-shadow-2xl animate-fade-in"
-                    />
-                  </div>
-                </div>
-
-                <div className="relative h-[700px] md:h-[800px]">
-                  {services.map((service, index) => (
-                    <div
-                      key={service.id}
-                      className="absolute transform -translate-x-1/2 -translate-y-1/2 animate-fade-in"
-                      style={{ 
-                        left: service.x, 
-                        top: service.y,
-                        animationDelay: `${index * 100}ms`
-                      }}
-                    >
-                      <div className="group cursor-pointer">
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-[3px] border-[#2C3E50] dark:border-white/60 bg-[#6B9AC4] dark:bg-[#4A7BA7] flex flex-col items-center justify-center gap-2 hover:scale-110 transition-all duration-300 hover:shadow-2xl hover:border-[#2C3E50]/80 dark:hover:border-white">
-                          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-[#2C3E50] dark:border-white/60 flex items-center justify-center bg-[#5A8AB4] dark:bg-[#3A6A97] group-hover:bg-[#4A7AA4] transition-colors">
-                            <Icon name={service.icon} size={24} className="text-[#2C3E50] dark:text-white" />
-                          </div>
-                        </div>
-                        <div className="text-center mt-4 max-w-[140px]">
-                          <p className="text-sm md:text-base font-medium text-[#2C3E50] dark:text-white leading-tight">
-                            {service.title}
-                          </p>
-                        </div>
-                      </div>
+              <div className="relative max-w-6xl mx-auto h-[800px]">
+                <svg width="100%" height="100%" className="absolute inset-0" preserveAspectRatio="xMidYMid meet">
+                  <defs>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  
+                  <line 
+                    x1="50%" 
+                    y1="50%" 
+                    x2="15%" 
+                    y2="30%" 
+                    stroke="#2C3E50" 
+                    strokeWidth="2.5"
+                    className="dark:stroke-white/50"
+                    strokeLinecap="round"
+                  />
+                  <line 
+                    x1="50%" 
+                    y1="50%" 
+                    x2="85%" 
+                    y2="30%" 
+                    stroke="#2C3E50" 
+                    strokeWidth="2.5"
+                    className="dark:stroke-white/50"
+                    strokeLinecap="round"
+                  />
+                  <line 
+                    x1="50%" 
+                    y1="50%" 
+                    x2="15%" 
+                    y2="70%" 
+                    stroke="#2C3E50" 
+                    strokeWidth="2.5"
+                    className="dark:stroke-white/50"
+                    strokeLinecap="round"
+                  />
+                  <line 
+                    x1="50%" 
+                    y1="50%" 
+                    x2="85%" 
+                    y2="70%" 
+                    stroke="#2C3E50" 
+                    strokeWidth="2.5"
+                    className="dark:stroke-white/50"
+                    strokeLinecap="round"
+                  />
+                  
+                  <foreignObject x="30%" y="42%" width="40%" height="16%">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <ArnoldMascot />
                     </div>
+                  </foreignObject>
+                  
+                  {services.map((service) => (
+                    <g key={service.id}>
+                      <circle
+                        cx={service.x}
+                        cy={service.y}
+                        r="70"
+                        fill="#6B9AC4"
+                        className="dark:fill-[#4A7BA7]"
+                        stroke="#2C3E50"
+                        strokeWidth="3"
+                        className="dark:stroke-white/60 cursor-pointer transition-all hover:r-75"
+                      />
+                      <circle
+                        cx={service.x}
+                        cy={service.y}
+                        r="28"
+                        fill="#5A8AB4"
+                        className="dark:fill-[#3A6A97]"
+                        stroke="#2C3E50"
+                        strokeWidth="2"
+                        className="dark:stroke-white/60"
+                      />
+                      <foreignObject 
+                        x={`calc(${service.x} - 14px)`} 
+                        y={`calc(${service.y} - 14px)`} 
+                        width="28" 
+                        height="28"
+                      >
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Icon name={service.icon} size={20} className="text-[#2C3E50] dark:text-white" />
+                        </div>
+                      </foreignObject>
+                    </g>
                   ))}
-                </div>
+                </svg>
+                
+                {services.map((service, index) => (
+                  <div
+                    key={service.id}
+                    className="absolute transform -translate-x-1/2 translate-y-20 animate-fade-in pointer-events-none"
+                    style={{ 
+                      left: service.x, 
+                      top: service.y,
+                      animationDelay: `${index * 100}ms`
+                    }}
+                  >
+                    <p className="text-sm md:text-base font-medium text-[#2C3E50] dark:text-white text-center max-w-[140px] leading-tight">
+                      {service.title}
+                    </p>
+                  </div>
+                ))}
               </div>
 
-              <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: '400ms' }}>
+              <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '400ms' }}>
                 <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 dark:bg-black/20 rounded-full text-sm font-medium text-[#2C3E50] dark:text-white backdrop-blur-sm">
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                   Resource Center
