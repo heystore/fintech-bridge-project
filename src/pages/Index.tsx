@@ -32,7 +32,7 @@ const Index = () => {
   const menuItems = [
     {
       id: 'kyc',
-      title: 'Верификация KYC',
+      title: 'Активация сервисов',
       icon: 'UserCheck',
       hasSubmenu: true,
       submenu: [
@@ -50,13 +50,13 @@ const Index = () => {
     {
       id: 'esim',
       title: 'Мировые eSIM',
-      icon: 'Radio',
+      icon: 'Smartphone',
       hasSubmenu: false
     },
     {
       id: 'business',
       title: 'IT для бизнеса',
-      icon: 'Lightbulb',
+      icon: 'Laptop',
       hasSubmenu: false
     },
     {
