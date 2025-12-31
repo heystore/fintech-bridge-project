@@ -84,25 +84,13 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
         {(service.acceptsVisa || service.acceptsMastercard) && (
           <div className="flex gap-2 justify-end mb-2">
             {service.acceptsVisa && (
-              <div className="relative overflow-hidden rounded px-2 py-1">
-                <div className="absolute inset-0 animate-shimmer" style={{
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)',
-                  backgroundSize: '200% 100%',
-                }} />
-                <div className="relative">
-                  <VisaLogo width={40} height={13} />
-                </div>
+              <div className="relative animate-logo-shimmer">
+                <VisaLogo width={40} height={13} />
               </div>
             )}
             {service.acceptsMastercard && (
-              <div className="relative overflow-hidden rounded px-2 py-1">
-                <div className="absolute inset-0 animate-shimmer" style={{
-                  background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)',
-                  backgroundSize: '200% 100%',
-                }} />
-                <div className="relative">
-                  <MastercardLogo width={32} height={20} />
-                </div>
+              <div className="relative animate-logo-shimmer">
+                <MastercardLogo width={32} height={20} />
               </div>
             )}
           </div>
