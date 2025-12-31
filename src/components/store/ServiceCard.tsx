@@ -65,17 +65,19 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
           )}
         </div>
         
-        <h3 className="text-lg font-semibold text-[#0F172A] mb-1">
-          {service.name}
-        </h3>
-        
-        <p className="text-xs text-[#334155] mb-2">
-          {service.type}
-        </p>
-        
-        <p className="text-sm text-[#64748B] mb-3 flex-1 line-clamp-2">
-          {service.description}
-        </p>
+        <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3 mb-3">
+          <h3 className="text-lg font-semibold text-[#0F172A] mb-1">
+            {service.name}
+          </h3>
+          
+          <p className="text-xs text-[#334155] mb-2">
+            {service.type}
+          </p>
+          
+          <p className="text-sm text-[#64748B] line-clamp-2">
+            {service.description}
+          </p>
+        </div>
         
         {(service.acceptsVisa || service.acceptsMastercard) && (
           <div className="flex gap-2 justify-end mb-2">
