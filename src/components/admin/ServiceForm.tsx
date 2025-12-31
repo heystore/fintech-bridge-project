@@ -85,21 +85,6 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Тип
-              </label>
-              <select
-                value={formData.type}
-                onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white"
-              >
-                <option value="Финтех">Финтех</option>
-                <option value="Криптовалюта">Криптовалюта</option>
-                <option value="Сервис">Сервис</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Категория
               </label>
               <select
@@ -107,9 +92,9 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white"
               >
-                <option value="kyc-fintech">KYC-финтех</option>
-                <option value="crypto-exchange">Крипто-биржи</option>
-                <option value="crypto-wallet">Крипто-кошельки</option>
+                <option value="kyc-fintech">Финтехи и банки</option>
+                <option value="kyc-crypto">Криптобиржи</option>
+                <option value="kyc-platforms">Платформы</option>
               </select>
             </div>
 
