@@ -1,4 +1,5 @@
 import Icon from '@/components/ui/icon';
+import MastercardLogo from '@/components/ui/MastercardLogo';
 
 interface Service {
   id: string;
@@ -93,8 +94,8 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
               </div>
             )}
             {service.acceptsMastercard && (
-              <div className="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold tracking-wider text-[#EB001B]">
-                mastercard
+              <div className="bg-white/95 backdrop-blur-sm px-2 py-1 rounded-full flex items-center">
+                <MastercardLogo width={32} height={20} />
               </div>
             )}
           </div>
