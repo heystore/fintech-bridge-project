@@ -31,7 +31,11 @@ def handler(event: dict, context) -> dict:
                 SELECT id, name, type, category, icon, description, price, cta,
                        background_image as "backgroundImage", logo_svg as "logoSvg",
                        accepts_visa as "acceptsVisa", accepts_mastercard as "acceptsMastercard",
-                       priority
+                       accepts_apple_pay as "acceptsApplePay", accepts_google_pay as "acceptsGooglePay",
+                       card_reissue as "cardReissue", high_payment_approval as "highPaymentApproval",
+                       crypto_support as "cryptoSupport", sepa_iban as "sepaIban",
+                       ach_usd as "achUsd", swift, supported_currencies as "supportedCurrencies",
+                       billing_regions as "billingRegions", priority
                 FROM services
                 ORDER BY priority DESC, created_at DESC
             ''')
@@ -52,14 +56,22 @@ def handler(event: dict, context) -> dict:
             cur.execute('''
                 INSERT INTO services (
                     id, name, type, category, icon, description, price, cta,
-                    background_image, logo_svg, accepts_visa, accepts_mastercard, priority
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    background_image, logo_svg, accepts_visa, accepts_mastercard,
+                    accepts_apple_pay, accepts_google_pay, card_reissue, high_payment_approval,
+                    crypto_support, sepa_iban, ach_usd, swift, supported_currencies,
+                    billing_regions, priority
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id
             ''', (
                 data['id'], data['name'], data['type'], data['category'],
                 data['icon'], data['description'], data['price'], data['cta'],
                 data.get('backgroundImage'), data.get('logoSvg'),
                 data.get('acceptsVisa', False), data.get('acceptsMastercard', False),
+                data.get('acceptsApplePay', False), data.get('acceptsGooglePay', False),
+                data.get('cardReissue', False), data.get('highPaymentApproval', False),
+                data.get('cryptoSupport', False), data.get('sepaIban', False),
+                data.get('achUsd', False), data.get('swift', False),
+                data.get('supportedCurrencies', []), data.get('billingRegions', []),
                 data.get('priority', 0)
             ))
             
@@ -84,6 +96,11 @@ def handler(event: dict, context) -> dict:
                     description = %s, price = %s, cta = %s,
                     background_image = %s, logo_svg = %s,
                     accepts_visa = %s, accepts_mastercard = %s,
+                    accepts_apple_pay = %s, accepts_google_pay = %s,
+                    card_reissue = %s, high_payment_approval = %s,
+                    crypto_support = %s, sepa_iban = %s,
+                    ach_usd = %s, swift = %s,
+                    supported_currencies = %s, billing_regions = %s,
                     priority = %s,
                     updated_at = CURRENT_TIMESTAMP
                 WHERE id = %s
@@ -92,6 +109,11 @@ def handler(event: dict, context) -> dict:
                 data['description'], data['price'], data['cta'],
                 data.get('backgroundImage'), data.get('logoSvg'),
                 data.get('acceptsVisa', False), data.get('acceptsMastercard', False),
+                data.get('acceptsApplePay', False), data.get('acceptsGooglePay', False),
+                data.get('cardReissue', False), data.get('highPaymentApproval', False),
+                data.get('cryptoSupport', False), data.get('sepaIban', False),
+                data.get('achUsd', False), data.get('swift', False),
+                data.get('supportedCurrencies', []), data.get('billingRegions', []),
                 data.get('priority', 0),
                 data['id']
             ))
