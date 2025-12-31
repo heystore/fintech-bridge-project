@@ -69,17 +69,11 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
           )}
         </div>
         
-        <h3 className="text-lg font-semibold text-black mb-2 w-fit">
+        <h3 className="text-lg font-semibold text-black mb-3 w-fit">
           <span className="bg-white/95 backdrop-blur-sm px-2 py-0.5 rounded-full">
             {service.name}
           </span>
         </h3>
-        
-        <p className="text-xs text-black mb-3 w-fit">
-          <span className="bg-white/95 backdrop-blur-sm px-2 py-0.5 rounded-full">
-            {service.type}
-          </span>
-        </p>
         
         <p className="text-sm text-black mb-3 flex-1 line-clamp-2">
           <span className="bg-white/95 backdrop-blur-sm px-2 py-0.5 rounded-full inline">
