@@ -88,12 +88,12 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
         {(service.acceptsVisa || service.acceptsMastercard) && (
           <div className="flex gap-2 justify-end mb-2">
             {service.acceptsVisa && (
-              <div className="bg-[#1A1F71] text-white px-3 py-1 rounded text-xs font-bold tracking-wider">
+              <div className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold tracking-wider text-[#1A1F71]">
                 VISA
               </div>
             )}
             {service.acceptsMastercard && (
-              <div className="bg-gradient-to-r from-[#EB001B] to-[#FF5F00] text-white px-2.5 py-1 rounded text-xs font-bold tracking-wider">
+              <div className="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-full text-xs font-bold tracking-wider text-[#EB001B]">
                 mastercard
               </div>
             )}
