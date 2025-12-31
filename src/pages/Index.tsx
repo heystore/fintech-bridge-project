@@ -7,7 +7,6 @@ import FilterSidebar from '@/components/store/FilterSidebar';
 import ServiceCard from '@/components/store/ServiceCard';
 import VPNSection from '@/components/store/VPNSection';
 import ESIMSection from '@/components/store/ESIMSection';
-import ArnoldMascot from '@/components/ArnoldMascot';
 
 interface Service {
   id: string;
@@ -217,18 +216,13 @@ const Index = () => {
       />
 
       <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <header className="py-4 flex items-center justify-between border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16">
-                <ArnoldMascot />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {menuItems.find(item => item.id === activeSection)?.title || 
-                 menuItems.flatMap(item => item.submenu || []).find(sub => sub.id === activeSection)?.title || 
-                 'Каталог'}
-              </h2>
-            </div>
+        <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {menuItems.find(item => item.id === activeSection)?.title || 
+               menuItems.flatMap(item => item.submenu || []).find(sub => sub.id === activeSection)?.title || 
+               'Каталог'}
+            </h2>
             <Button
               variant="ghost"
               size="icon"
@@ -237,11 +231,11 @@ const Index = () => {
             >
               <Icon name={darkMode ? 'Sun' : 'Moon'} size={20} />
             </Button>
-          </header>
-
-          <div className="py-8">
-            {renderContent()}
           </div>
+        </header>
+
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          {renderContent()}
         </div>
       </main>
 
