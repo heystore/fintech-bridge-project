@@ -84,14 +84,10 @@ const ServiceCard = ({ service, isSelected, onClick }: ServiceCardProps) => {
         {(service.acceptsVisa || service.acceptsMastercard) && (
           <div className="flex gap-2 justify-end mb-2">
             {service.acceptsVisa && (
-              <div className="relative animate-logo-shimmer">
-                <VisaLogo width={40} height={13} />
-              </div>
+              <VisaLogo width={40} height={13} />
             )}
             {service.acceptsMastercard && (
-              <div className="relative animate-logo-shimmer">
-                <MastercardLogo width={32} height={20} />
-              </div>
+              <MastercardLogo width={32} height={20} />
             )}
           </div>
         )}
