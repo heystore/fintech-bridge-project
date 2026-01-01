@@ -6,7 +6,7 @@ import AdminLoginForm from '@/components/admin/AdminLoginForm';
 import AdminProductsTab from '@/components/admin/AdminProductsTab';
 import AdminSettingsTab from '@/components/admin/AdminSettingsTab';
 
-const DEFAULT_PASSWORD = 'HeyStore2025!Secure#Admin';
+const DEFAULT_PASSWORD = 'admin2025';
 
 interface Service {
   id: string;
