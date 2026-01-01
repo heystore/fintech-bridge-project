@@ -21,9 +21,8 @@ const Header = ({ onSearch, darkMode, onToggleDarkMode }: HeaderProps) => {
   };
 
   return (
-    <header className="bg-[#4a4a6a] dark:bg-gray-800 border-b border-gray-700 px-6 py-4">
+    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
       <div className="flex items-center justify-between gap-6">
-        {/* Поиск */}
         <div className="flex-1 max-w-xl relative">
           <Icon 
             name="Search" 
@@ -35,17 +34,15 @@ const Header = ({ onSearch, darkMode, onToggleDarkMode }: HeaderProps) => {
             placeholder="Искать Подписки и игры"
             value={searchQuery}
             onChange={handleSearchChange}
-            className="pl-10 bg-[#5a5a7a] dark:bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-500"
+            className="pl-10"
           />
         </div>
 
-        {/* Кнопки справа */}
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="sm"
             onClick={onToggleDarkMode}
-            className="text-white hover:bg-[#5a5a7a] dark:hover:bg-gray-700"
           >
             <Icon name={darkMode ? 'Sun' : 'Moon'} size={20} />
           </Button>
@@ -53,7 +50,7 @@ const Header = ({ onSearch, darkMode, onToggleDarkMode }: HeaderProps) => {
           <Button
             variant="ghost"
             size="sm"
-            className="text-white hover:bg-[#5a5a7a] dark:hover:bg-gray-700 gap-2"
+            className="gap-2"
           >
             <Icon name="User" size={20} />
             <span>Войти</span>
@@ -62,7 +59,7 @@ const Header = ({ onSearch, darkMode, onToggleDarkMode }: HeaderProps) => {
           <Button
             variant="ghost"
             size="sm"
-            className="text-white hover:bg-[#5a5a7a] dark:hover:bg-gray-700 gap-2"
+            className="gap-2"
           >
             <Icon name="ShoppingCart" size={20} />
             <span>Корзина</span>
@@ -71,7 +68,7 @@ const Header = ({ onSearch, darkMode, onToggleDarkMode }: HeaderProps) => {
           <Button
             variant="ghost"
             size="sm"
-            className="text-white hover:bg-[#5a5a7a] dark:hover:bg-gray-700 gap-2"
+            className="gap-2"
           >
             <Icon name="MessageCircle" size={20} />
             <span>Поддержка</span>
