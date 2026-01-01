@@ -274,13 +274,15 @@ const Index = () => {
             onToggleDarkMode={toggleDarkMode}
           />
 
-          {(activeSection.includes('kyc')) && <FilterSidebar onFiltersChange={setFilters} />}
+          <div className="flex flex-1 overflow-hidden">
+            <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
+              <div className="max-w-7xl mx-auto px-6 py-8">
+                {renderContent()}
+              </div>
+            </main>
 
-          <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
-            <div className="max-w-7xl mx-auto px-6 py-8">
-              {renderContent()}
-            </div>
-          </main>
+            {(activeSection.includes('kyc')) && <FilterSidebar onFiltersChange={setFilters} />}
+          </div>
         </div>
       </div>
     </div>
