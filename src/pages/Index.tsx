@@ -179,6 +179,10 @@ const Index = () => {
 
     if (activeSection === 'kyc-fintech' || activeSection === 'kyc-crypto' || activeSection === 'kyc-platforms') {
       filtered = filtered.filter(s => s.category === activeSection);
+    } else if (activeSection === 'kyc') {
+      filtered = filtered.filter(s => 
+        s.category === 'kyc-fintech' || s.category === 'kyc-crypto' || s.category === 'kyc-platforms'
+      );
     } else if (activeSection !== 'kyc') {
       filtered = filtered.filter(s => s.category === activeSection);
     }

@@ -55,18 +55,12 @@ const Sidebar = ({
         {menuItems.map((item) => (
           <div key={item.id}>
             <button
-              onClick={() => {
-                if (item.hasSubmenu) {
-                  onToggleSection(item.id);
-                } else {
-                  onSectionChange(item.id);
-                }
-              }}
+              onClick={() => onSectionChange(item.id)}
               className={`
                 w-full flex items-center justify-between px-4 py-3 rounded-lg 
                 transition-all duration-200 text-left
                 ${item.isSubitem ? 'pl-8 text-sm' : ''}
-                ${activeSection === item.id || expandedSections.includes(item.id)
+                ${activeSection === item.id
                   ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }
@@ -83,10 +77,18 @@ const Sidebar = ({
                   </span>
                 )}
                 {item.hasSubmenu && (
-                  <Icon
-                    name={expandedSections.includes(item.id) ? 'ChevronDown' : 'ChevronRight'}
-                    size={16}
-                  />
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onToggleSection(item.id);
+                    }}
+                    className="p-1 hover:bg-blue-100 dark:hover:bg-blue-800/30 rounded transition-colors"
+                  >
+                    <Icon
+                      name={expandedSections.includes(item.id) ? 'ChevronDown' : 'ChevronRight'}
+                      size={16}
+                    />
+                  </button>
                 )}
               </div>
             </button>
