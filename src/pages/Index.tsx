@@ -177,7 +177,9 @@ const Index = () => {
   const getFilteredServices = () => {
     let filtered = services;
 
-    if (activeSection !== 'kyc') {
+    if (activeSection === 'kyc-fintech' || activeSection === 'kyc-crypto' || activeSection === 'kyc-platforms') {
+      filtered = filtered.filter(s => s.category === activeSection);
+    } else if (activeSection !== 'kyc') {
       filtered = filtered.filter(s => s.category === activeSection);
     }
 
