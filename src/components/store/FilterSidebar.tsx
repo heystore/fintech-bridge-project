@@ -26,7 +26,6 @@ export interface Filters {
   };
   currencies: string[];
   billingRegions: string[];
-  cardBillingCountries: string[];
 }
 
 const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarProps) => {
@@ -50,7 +49,6 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
     },
     currencies: [],
     billingRegions: [],
-    cardBillingCountries: [],
   });
 
   const updateFilters = (newFilters: Filters) => {
@@ -101,7 +99,6 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
       },
       currencies: [],
       billingRegions: [],
-      cardBillingCountries: [],
     };
     updateFilters(emptyFilters);
   };
@@ -117,25 +114,14 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
     updateFilters(newFilters);
   };
 
-  const toggleCountry = (countryCode: string) => {
-    const newCountries = filters.cardBillingCountries.includes(countryCode)
-      ? filters.cardBillingCountries.filter(c => c !== countryCode)
-      : [...filters.cardBillingCountries, countryCode];
-    
-    const newFilters = {
-      ...filters,
-      cardBillingCountries: newCountries,
-    };
-    updateFilters(newFilters);
-  };
+
 
   const hasActiveFilters = 
     Object.values(filters.paymentMethods).some(v => v) ||
     Object.values(filters.features).some(v => v) ||
     Object.values(filters.accounts).some(v => v) ||
     filters.currencies.length > 0 ||
-    filters.billingRegions.length > 0 ||
-    filters.cardBillingCountries.length > 0;
+    filters.billingRegions.length > 0;
 
   return (
     <aside className="w-72 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 flex flex-col">
@@ -154,7 +140,7 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
           )}
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Подбор по признакам
+          Подбор решения по признакам
         </p>
       </div>
 
@@ -294,25 +280,7 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
           </div>
         </div>
 
-        <div>
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-            Адрес карт
-          </h3>
-          <div className="space-y-2 max-h-48 overflow-y-auto">
-            {availableCountries.map((country) => (
-              <label key={country.code} className="flex items-center gap-2 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={filters.cardBillingCountries.includes(country.code)}
-                  onChange={() => toggleCountry(country.code)}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm">{country.flag}</span>
-                <span className="text-sm text-gray-700 dark:text-gray-300">{country.name}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+
       </div>
     </aside>
   );

@@ -32,15 +32,11 @@ interface Service {
   supportedCurrencies?: string[];
   swift?: boolean;
   billingRegions?: string[];
-  cardBillingCountries?: string[];
+
   priority?: number;
 }
 
-interface Country {
-  code: string;
-  name: string;
-  flag: string;
-}
+
 
 const API_URL = 'https://functions.poehali.dev/692cf256-c3fb-49b8-9844-ae94296d195a';
 
@@ -74,18 +70,13 @@ const Index = () => {
     accounts: { sepa: false, eurIban: false, swift: false, usdAch: false },
     currencies: [],
     billingRegions: [],
-    cardBillingCountries: [],
   });
-  const [countries, setCountries] = useState<Country[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [servicesRes, countriesRes] = await Promise.all([
-          fetch(API_URL),
-          fetch(`${API_URL}?resource=countries`)
-        ]);
+        const servicesRes = await fetch(API_URL);
 
         if (servicesRes.ok) {
           const data = await servicesRes.json();
@@ -96,11 +87,6 @@ const Index = () => {
           }
         } else {
           setServices(defaultServices);
-        }
-
-        if (countriesRes.ok) {
-          const countriesData = await countriesRes.json();
-          setCountries(countriesData);
         }
       } catch (error) {
         console.error('Failed to load data:', error);
@@ -242,12 +228,7 @@ const Index = () => {
       filtered = filtered.filter(s => s.achUsd);
     }
 
-    if (filters.cardBillingCountries.length > 0) {
-      filtered = filtered.filter(s => 
-        s.cardBillingCountries && 
-        filters.cardBillingCountries.some(country => s.cardBillingCountries?.includes(country))
-      );
-    }
+
 
     return filtered;
   };
@@ -317,7 +298,7 @@ const Index = () => {
               </div>
             </main>
 
-            {(activeSection.includes('kyc')) && <FilterSidebar onFiltersChange={setFilters} availableCountries={countries} />}
+            {(activeSection.includes('kyc')) && <FilterSidebar onFiltersChange={setFilters} availableCountries={[]} />}
           </div>
         </div>
       </div>
