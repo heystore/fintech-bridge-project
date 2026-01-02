@@ -77,18 +77,18 @@ const Sidebar = ({
                   </span>
                 )}
                 {item.hasSubmenu && (
-                  <div
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       onToggleSection(item.id);
                     }}
-                    className="p-1 hover:bg-blue-100 dark:hover:bg-blue-800/30 rounded transition-colors cursor-pointer"
+                    className="p-1 hover:bg-blue-100 dark:hover:bg-blue-800/30 rounded transition-colors"
                   >
                     <Icon
                       name={expandedSections.includes(item.id) ? 'ChevronDown' : 'ChevronRight'}
                       size={16}
                     />
-                  </div>
+                  </button>
                 )}
               </div>
             </button>
