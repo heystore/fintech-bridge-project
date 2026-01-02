@@ -154,7 +154,7 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
           )}
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Подбор по признакам
+          Подбор решения по признакам
         </p>
       </div>
 
