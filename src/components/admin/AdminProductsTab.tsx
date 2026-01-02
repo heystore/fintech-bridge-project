@@ -68,7 +68,7 @@ const AdminProductsTab = ({
         </Button>
       </div>
 
-      {(editingService || isAddingNew) && editingService && (
+      {editingService && (
         <ServiceForm
           service={editingService}
           onSave={onSave}
