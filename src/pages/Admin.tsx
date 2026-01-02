@@ -52,6 +52,8 @@ const Admin = () => {
   const [changePasswordError, setChangePasswordError] = useState('');
   const [changePasswordSuccess, setChangePasswordSuccess] = useState('');
   const [services, setServices] = useState<Service[]>([]);
+  const [loadError, setLoadError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
   const navigate = useNavigate();
@@ -69,14 +71,21 @@ const Admin = () => {
   }, []);
 
   const loadServices = async () => {
+    setIsLoading(true);
+    setLoadError('');
     try {
       const response = await fetch(API_URL);
       if (response.ok) {
         const data = await response.json();
         setServices(data);
+      } else {
+        setLoadError(`Ошибка загрузки: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
       console.error('Failed to load services:', error);
+      setLoadError('Не удалось подключиться к серверу. Проверьте интернет-соединение.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -171,7 +180,7 @@ const Admin = () => {
       setIsAddingNew(false);
     } catch (error) {
       console.error('Failed to save service:', error);
-      alert('Ошибка при сохранении');
+      alert(`Ошибка при сохранении: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`);
     }
   };
 
@@ -182,7 +191,7 @@ const Admin = () => {
         await loadServices();
       } catch (error) {
         console.error('Failed to delete service:', error);
-        alert('Ошибка при удалении');
+        alert(`Ошибка при удалении: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`);
       }
     }
   };
@@ -242,6 +251,7 @@ const Admin = () => {
       );
     } catch (error) {
       console.error('Failed to update priorities:', error);
+      alert(`Ошибка обновления приоритета: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`);
       await loadServices();
     }
   };
@@ -315,7 +325,29 @@ const Admin = () => {
       </header>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
-        {activeTab === 'products' && (
+        {loadError && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Icon name="AlertCircle" size={20} className="text-red-600 dark:text-red-400" />
+              <div>
+                <p className="text-sm font-medium text-red-900 dark:text-red-100">Ошибка загрузки данных</p>
+                <p className="text-sm text-red-700 dark:text-red-300">{loadError}</p>
+              </div>
+            </div>
+            <Button onClick={loadServices} variant="outline" size="sm">
+              <Icon name="RefreshCw" size={16} className="mr-2" />
+              Повторить
+            </Button>
+          </div>
+        )}
+
+        {isLoading && (
+          <div className="flex items-center justify-center py-12">
+            <Icon name="Loader2" size={32} className="animate-spin text-gray-400" />
+          </div>
+        )}
+
+        {!isLoading && activeTab === 'products' && (
           <AdminProductsTab
             services={services}
             editingService={editingService}

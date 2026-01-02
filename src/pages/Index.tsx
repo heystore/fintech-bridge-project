@@ -77,10 +77,14 @@ const Index = () => {
     cardBillingCountries: [],
   });
   const [countries, setCountries] = useState<Country[]>([]);
+  const [loadError, setLoadError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true);
+      setLoadError('');
       try {
         const [servicesRes, countriesRes] = await Promise.all([
           fetch(API_URL),
@@ -95,6 +99,7 @@ const Index = () => {
             setServices(data);
           }
         } else {
+          setLoadError(`Ошибка загрузки товаров: ${servicesRes.status}`);
           setServices(defaultServices);
         }
 
@@ -104,7 +109,10 @@ const Index = () => {
         }
       } catch (error) {
         console.error('Failed to load data:', error);
+        setLoadError('Не удалось подключиться к серверу');
         setServices(defaultServices);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -313,7 +321,24 @@ const Index = () => {
           <div className="flex flex-1 overflow-hidden">
             <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
               <div className="max-w-7xl mx-auto px-6 py-8">
-                {renderContent()}
+                {loadError && (
+                  <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <Icon name="AlertTriangle" size={20} className="text-yellow-600 dark:text-yellow-400" />
+                      <div>
+                        <p className="text-sm font-medium text-yellow-900 dark:text-yellow-100">Проблема с загрузкой</p>
+                        <p className="text-sm text-yellow-700 dark:text-yellow-300">{loadError}. Показаны данные по умолчанию.</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {isLoading ? (
+                  <div className="flex items-center justify-center py-12">
+                    <Icon name="Loader2" size={32} className="animate-spin text-gray-400" />
+                  </div>
+                ) : (
+                  renderContent()
+                )}
               </div>
             </main>
 
