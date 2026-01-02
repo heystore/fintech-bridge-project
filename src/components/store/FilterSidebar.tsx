@@ -3,7 +3,6 @@ import Icon from '@/components/ui/icon';
 
 interface FilterSidebarProps {
   onFiltersChange: (filters: Filters) => void;
-  availableCountries: Array<{ code: string; name: string; flag: string }>;
 }
 
 export interface Filters {
@@ -29,7 +28,7 @@ export interface Filters {
   cardBillingCountries: string[];
 }
 
-const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarProps) => {
+const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
   const [filters, setFilters] = useState<Filters>({
     paymentMethods: {
       visa: false,
@@ -113,18 +112,6 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
         ...filters.accounts,
         [account]: !filters.accounts[account],
       },
-    };
-    updateFilters(newFilters);
-  };
-
-  const toggleCountry = (countryCode: string) => {
-    const newCountries = filters.cardBillingCountries.includes(countryCode)
-      ? filters.cardBillingCountries.filter(c => c !== countryCode)
-      : [...filters.cardBillingCountries, countryCode];
-    
-    const newFilters = {
-      ...filters,
-      cardBillingCountries: newCountries,
     };
     updateFilters(newFilters);
   };
@@ -291,26 +278,6 @@ const FilterSidebar = ({ onFiltersChange, availableCountries }: FilterSidebarPro
               <Icon name="DollarSign" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
               <span className="text-sm text-gray-700 dark:text-gray-300">USD ACH</span>
             </label>
-          </div>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
-            Адрес карт
-          </h3>
-          <div className="space-y-2 max-h-48 overflow-y-auto">
-            {availableCountries.map((country) => (
-              <label key={country.code} className="flex items-center gap-2 cursor-pointer group">
-                <input
-                  type="checkbox"
-                  checked={filters.cardBillingCountries.includes(country.code)}
-                  onChange={() => toggleCountry(country.code)}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <span className="text-sm">{country.flag}</span>
-                <span className="text-sm text-gray-700 dark:text-gray-300">{country.name}</span>
-              </label>
-            ))}
           </div>
         </div>
       </div>
