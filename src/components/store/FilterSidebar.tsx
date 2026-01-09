@@ -175,12 +175,12 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
         </p>
       </div>
 
-      <div className="flex-1 p-4 space-y-3 overflow-hidden">
+      <div className="flex-1 p-4 flex flex-col justify-evenly overflow-hidden">
         <div>
-          <h3 className="text-xs font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Наши рекомендации
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
@@ -188,8 +188,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleRecommendation('forDigital')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="ShoppingCart" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Для цифровых товаров</span>
+              <Icon name="ShoppingCart" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Для цифровых товаров</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -198,8 +198,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleRecommendation('forTravel')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Plane" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Для путешествий</span>
+              <Icon name="Plane" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Для путешествий</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -208,17 +208,17 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleRecommendation('forBanking')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Landmark" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Для банковских операций</span>
+              <Icon name="Landmark" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Для банковских операций</span>
             </label>
           </div>
         </div>
 
         <div>
-          <h3 className="text-xs font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Способы оплаты
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
@@ -226,8 +226,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => togglePaymentMethod('visa')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="CreditCard" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">VISA</span>
+              <Icon name="CreditCard" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">VISA</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -236,8 +236,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => togglePaymentMethod('mastercard')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="CreditCard" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Mastercard</span>
+              <Icon name="CreditCard" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Mastercard</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -246,8 +246,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => togglePaymentMethod('applePay')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Apple" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Apple Pay</span>
+              <Icon name="Apple" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Apple Pay</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -256,17 +256,17 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => togglePaymentMethod('googlePay')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Smartphone" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Google Pay</span>
+              <Icon name="Smartphone" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Google Pay</span>
             </label>
           </div>
         </div>
 
         <div>
-          <h3 className="text-xs font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Возможности
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
@@ -274,8 +274,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleFeature('cardReissue')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="RefreshCw" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Перевыпуск карт</span>
+              <Icon name="RefreshCw" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Перевыпуск карт</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -284,8 +284,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleFeature('highPaymentApproval')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="TrendingUp" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Высокая проходимость</span>
+              <Icon name="TrendingUp" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Высокая проходимость</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -294,8 +294,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleFeature('cryptoSupport')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Coins" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">Поддержка крипты</span>
+              <Icon name="Coins" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Поддержка крипты</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -304,17 +304,17 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleFeature('supports3DS')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Shield" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">3D Secure</span>
+              <Icon name="Shield" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">3D Secure</span>
             </label>
           </div>
         </div>
 
         <div>
-          <h3 className="text-xs font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Счета
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
@@ -322,8 +322,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleAccount('sepa')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Building2" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">SEPA</span>
+              <Icon name="Building2" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">SEPA</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -332,8 +332,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleAccount('eurIban')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="CreditCard" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">EUR IBAN</span>
+              <Icon name="CreditCard" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">EUR IBAN</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -342,8 +342,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleAccount('swift')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="Zap" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">SWIFT</span>
+              <Icon name="Zap" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">SWIFT</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
@@ -352,8 +352,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
                 onChange={() => toggleAccount('usdAch')}
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
               />
-              <Icon name="DollarSign" size={13} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
-              <span className="text-xs text-gray-700 dark:text-gray-300">USD ACH</span>
+              <Icon name="DollarSign" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">USD ACH</span>
             </label>
           </div>
         </div>
