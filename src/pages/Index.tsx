@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import Sidebar from '@/components/store/Sidebar';
 import Header from '@/components/store/Header';
-import FilterSidebar, { Filters } from '@/components/store/FilterSidebar';
+import FiltersSidebar, { Filters } from '@/components/store/FiltersSidebar';
+import NavigationSidebar from '@/components/store/NavigationSidebar';
 import ServiceCard from '@/components/store/ServiceCard';
 import VPNSection from '@/components/store/VPNSection';
 import ESIMSection from '@/components/store/ESIMSection';
@@ -303,48 +303,51 @@ const Index = () => {
 
   return (
     <div className={`flex flex-col h-screen ${darkMode ? 'dark' : ''}`}>
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar
+      <Header
+        darkMode={darkMode}
+        onToggleDarkMode={toggleDarkMode}
+      />
+      
+      <div className="flex flex-1 overflow-hidden pt-16">
+        <FiltersSidebar
+          darkMode={darkMode}
+          filters={filters}
+          setFilters={setFilters}
+          activeSection={activeSection}
+          countries={countries}
+        />
+
+        <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
+          <div className="max-w-7xl mx-auto px-6 py-8">
+            {loadError && (
+              <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <Icon name="AlertTriangle" size={20} className="text-yellow-600 dark:text-yellow-400" />
+                  <div>
+                    <p className="text-sm font-medium text-yellow-900 dark:text-yellow-100">Проблема с загрузкой</p>
+                    <p className="text-sm text-yellow-700 dark:text-yellow-300">{loadError}. Показаны данные по умолчанию.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+            {isLoading ? (
+              <div className="flex items-center justify-center py-12">
+                <Icon name="Loader2" size={32} className="animate-spin text-gray-400" />
+              </div>
+            ) : (
+              renderContent()
+            )}
+          </div>
+        </main>
+
+        <NavigationSidebar
           menuItems={menuItems}
           activeSection={activeSection}
           expandedSections={expandedSections}
           onSectionChange={setActiveSection}
           onToggleSection={toggleSection}
+          darkMode={darkMode}
         />
-
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <Header
-            darkMode={darkMode}
-            onToggleDarkMode={toggleDarkMode}
-          />
-
-          <div className="flex flex-1 overflow-hidden">
-            <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
-              <div className="max-w-7xl mx-auto px-6 py-8">
-                {loadError && (
-                  <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      <Icon name="AlertTriangle" size={20} className="text-yellow-600 dark:text-yellow-400" />
-                      <div>
-                        <p className="text-sm font-medium text-yellow-900 dark:text-yellow-100">Проблема с загрузкой</p>
-                        <p className="text-sm text-yellow-700 dark:text-yellow-300">{loadError}. Показаны данные по умолчанию.</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                {isLoading ? (
-                  <div className="flex items-center justify-center py-12">
-                    <Icon name="Loader2" size={32} className="animate-spin text-gray-400" />
-                  </div>
-                ) : (
-                  renderContent()
-                )}
-              </div>
-            </main>
-
-            {(activeSection.includes('kyc')) && <FilterSidebar onFiltersChange={setFilters} availableCountries={countries} />}
-          </div>
-        </div>
       </div>
     </div>
   );
