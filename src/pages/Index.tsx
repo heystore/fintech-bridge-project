@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import Header from '@/components/store/Header';
-import FiltersSidebar, { Filters } from '@/components/store/FiltersSidebar';
+import FilterSidebar, { Filters } from '@/components/store/FilterSidebar';
 import NavigationSidebar from '@/components/store/NavigationSidebar';
 import ServiceCard from '@/components/store/ServiceCard';
 import VPNSection from '@/components/store/VPNSection';
@@ -309,16 +309,15 @@ const Index = () => {
       />
       
       <div className="flex flex-1 overflow-hidden pt-16">
-        <FiltersSidebar
-          darkMode={darkMode}
-          filters={filters}
-          setFilters={setFilters}
-          activeSection={activeSection}
-          countries={countries}
-        />
+        {(activeSection.includes('kyc')) && (
+          <FilterSidebar
+            onFiltersChange={setFilters}
+            availableCountries={countries}
+          />
+        )}
 
         <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
-          <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="max-w-7xl mx-auto px-6">
             {loadError && (
               <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
                 <div className="flex items-center gap-3">
