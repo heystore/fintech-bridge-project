@@ -317,7 +317,7 @@ const Index = () => {
         )}
 
         <main className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-7xl mx-auto px-6 py-8">
             {loadError && (
               <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
                 <div className="flex items-center gap-3">
