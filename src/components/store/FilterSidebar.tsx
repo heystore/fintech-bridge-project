@@ -156,7 +156,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
 
   return (
     <aside className="w-72 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col fixed left-0 top-16 bottom-0">
-      <div className="p-4 pb-3 flex-shrink-0">
+      <div className="px-4 pt-4 pb-2 flex-shrink-0">
         <div className="flex items-center justify-between mb-1">
           <h2 className="text-base font-bold text-gray-900 dark:text-white">
             Фильтры
@@ -175,12 +175,12 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
         </p>
       </div>
 
-      <div className="flex-1 p-4 pt-2 flex flex-col justify-evenly overflow-hidden">
+      <div className="flex-1 px-4 py-3 flex flex-col justify-evenly overflow-hidden">
         <div>
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1.5">
             Наши рекомендации
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
@@ -218,7 +218,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Способы оплаты
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
@@ -266,7 +266,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Возможности
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
@@ -314,7 +314,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Счета
           </h3>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="flex items-center gap-2 cursor-pointer group">
               <input
                 type="checkbox"
