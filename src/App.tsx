@@ -18,8 +18,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/cards" element={<Cards />} />
+          <Route path="/cards" element={<Index />} />
+          <Route path="/" element={<Cards />} />
           <Route path="/admin-heystore-secure-8f3a2b9c" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
