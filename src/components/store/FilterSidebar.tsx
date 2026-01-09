@@ -156,8 +156,8 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
 
   return (
     <aside className="w-72 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col fixed left-0 top-16 bottom-0">
-      <div className="px-4 pt-4 pb-2 flex-shrink-0">
-        <div className="flex items-center justify-between mb-1">
+      <div className="px-4 pt-3 pb-1 flex-shrink-0">
+        <div className="flex items-center justify-between mb-0.5">
           <h2 className="text-base font-bold text-gray-900 dark:text-white">
             Фильтры
           </h2>
@@ -175,7 +175,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
         </p>
       </div>
 
-      <div className="flex-1 px-4 pt-1 pb-3 flex flex-col justify-evenly overflow-hidden">
+      <div className="flex-1 px-4 pb-3 flex flex-col justify-evenly overflow-hidden">
         <div>
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1.5">
             Наши рекомендации
