@@ -10,23 +10,24 @@ const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4 ml-72">
-          <div className="flex items-center gap-3">
-            <img 
-              src="https://cdn.poehali.dev/files/arnold_250.png" 
-              alt="HEY, STORE!" 
-              className="w-10 h-10 object-contain"
-            />
-            <div>
-              <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                HEY, STORE!
-              </h1>
-              <p className="text-xs text-red-500 dark:text-red-400 font-medium">
-                финансы без санкций
-              </p>
-            </div>
+        <div className="flex items-center gap-3">
+          <img 
+            src="https://cdn.poehali.dev/files/arnold_250.png" 
+            alt="HEY, STORE!" 
+            className="w-10 h-10 object-contain"
+          />
+          <div>
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+              HEY, STORE!
+            </h1>
+            <p className="text-xs text-red-500 dark:text-red-400 font-medium">
+              финансы без санкций
+            </p>
           </div>
-          <nav className="flex items-center gap-1">
+        </div>
+
+        <div className="flex items-center gap-4">
+          <nav className="flex items-center gap-1 ml-72">
             <Button
               variant="ghost"
               size="sm"
@@ -57,15 +58,15 @@ const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
               <span className="text-sm">Блог</span>
             </Button>
           </nav>
-        </div>
 
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onToggleDarkMode}
-        >
-          <Icon name={darkMode ? 'Sun' : 'Moon'} size={20} />
-        </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onToggleDarkMode}
+          >
+            <Icon name={darkMode ? 'Sun' : 'Moon'} size={20} />
+          </Button>
+        </div>
       </div>
     </header>
   );
