@@ -30,6 +30,10 @@ interface Service {
   billingRegions?: string[];
   cardBillingCountries?: string[];
   priority?: number;
+  supports3DS?: boolean;
+  recommendedForDigital?: boolean;
+  recommendedForTravel?: boolean;
+  recommendedForBanking?: boolean;
 }
 
 interface ServiceFormProps {
@@ -158,6 +162,41 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                 className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white"
                 placeholder="0"
               />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+              Наши рекомендации
+            </label>
+            <div className="space-y-2">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.recommendedForDigital || false}
+                  onChange={(e) => setFormData({ ...formData, recommendedForDigital: e.target.checked })}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">Для цифровых товаров</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.recommendedForTravel || false}
+                  onChange={(e) => setFormData({ ...formData, recommendedForTravel: e.target.checked })}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">Для путешествий</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.recommendedForBanking || false}
+                  onChange={(e) => setFormData({ ...formData, recommendedForBanking: e.target.checked })}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <span className="text-sm text-gray-700 dark:text-gray-300">Для банковских операций</span>
+              </label>
             </div>
           </div>
 
@@ -297,6 +336,15 @@ const ServiceForm = ({ service, onSave, onCancel, darkMode }: ServiceFormProps) 
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                   />
                   <span className="text-sm text-gray-900 dark:text-white">Поддержка крипты</span>
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={formData.supports3DS || false}
+                    onChange={(e) => setFormData({ ...formData, supports3DS: e.target.checked })}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <span className="text-sm text-gray-900 dark:text-white">3D Secure</span>
                 </label>
                 <label className="flex items-center gap-2">
                   <input

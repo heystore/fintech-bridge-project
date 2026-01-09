@@ -6,6 +6,11 @@ interface FilterSidebarProps {
 }
 
 export interface Filters {
+  recommendations: {
+    forDigital: boolean;
+    forTravel: boolean;
+    forBanking: boolean;
+  };
   paymentMethods: {
     visa: boolean;
     mastercard: boolean;
@@ -16,6 +21,7 @@ export interface Filters {
     cardReissue: boolean;
     highPaymentApproval: boolean;
     cryptoSupport: boolean;
+    supports3DS: boolean;
   };
   accounts: {
     sepa: boolean;
@@ -30,6 +36,11 @@ export interface Filters {
 
 const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
   const [filters, setFilters] = useState<Filters>({
+    recommendations: {
+      forDigital: false,
+      forTravel: false,
+      forBanking: false,
+    },
     paymentMethods: {
       visa: false,
       mastercard: false,
@@ -40,6 +51,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
       cardReissue: false,
       highPaymentApproval: false,
       cryptoSupport: false,
+      supports3DS: false,
     },
     accounts: {
       sepa: false,
@@ -81,6 +93,11 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
 
   const resetFilters = () => {
     const emptyFilters: Filters = {
+      recommendations: {
+        forDigital: false,
+        forTravel: false,
+        forBanking: false,
+      },
       paymentMethods: {
         visa: false,
         mastercard: false,
@@ -91,6 +108,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
         cardReissue: false,
         highPaymentApproval: false,
         cryptoSupport: false,
+        supports3DS: false,
       },
       accounts: {
         sepa: false,
@@ -116,7 +134,19 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
     updateFilters(newFilters);
   };
 
+  const toggleRecommendation = (recommendation: keyof Filters['recommendations']) => {
+    const newFilters = {
+      ...filters,
+      recommendations: {
+        ...filters.recommendations,
+        [recommendation]: !filters.recommendations[recommendation],
+      },
+    };
+    updateFilters(newFilters);
+  };
+
   const hasActiveFilters = 
+    Object.values(filters.recommendations).some(v => v) ||
     Object.values(filters.paymentMethods).some(v => v) ||
     Object.values(filters.features).some(v => v) ||
     Object.values(filters.accounts).some(v => v) ||
@@ -146,6 +176,44 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+            Наши рекомендации
+          </h3>
+          <div className="space-y-2">
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={filters.recommendations.forDigital}
+                onChange={() => toggleRecommendation('forDigital')}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <Icon name="ShoppingCart" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Для цифровых товаров</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={filters.recommendations.forTravel}
+                onChange={() => toggleRecommendation('forTravel')}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <Icon name="Plane" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Для путешествий</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={filters.recommendations.forBanking}
+                onChange={() => toggleRecommendation('forBanking')}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <Icon name="Landmark" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">Для банковских операций</span>
+            </label>
+          </div>
+        </div>
+
         <div>
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
             Способы оплаты
@@ -229,7 +297,16 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
               <Icon name="Coins" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
               <span className="text-sm text-gray-700 dark:text-gray-300">Поддержка крипты</span>
             </label>
-
+            <label className="flex items-center gap-2 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={filters.features.supports3DS}
+                onChange={() => toggleFeature('supports3DS')}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+              />
+              <Icon name="Shield" size={14} className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+              <span className="text-sm text-gray-700 dark:text-gray-300">3D Secure</span>
+            </label>
           </div>
         </div>
 

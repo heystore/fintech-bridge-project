@@ -27,12 +27,16 @@ interface Service {
   cardReissue?: boolean;
   highPaymentApproval?: boolean;
   cryptoSupport?: boolean;
+  supports3DS?: boolean;
   sepaIban?: boolean;
   achUsd?: boolean;
   supportedCurrencies?: string[];
   swift?: boolean;
   billingRegions?: string[];
   cardBillingCountries?: string[];
+  recommendedForDigital?: boolean;
+  recommendedForTravel?: boolean;
+  recommendedForBanking?: boolean;
   priority?: number;
 }
 
@@ -69,8 +73,9 @@ const Index = () => {
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [filters, setFilters] = useState<Filters>({
+    recommendations: { forDigital: false, forTravel: false, forBanking: false },
     paymentMethods: { visa: false, mastercard: false, applePay: false, googlePay: false },
-    features: { cardReissue: false, highPaymentApproval: false, cryptoSupport: false },
+    features: { cardReissue: false, highPaymentApproval: false, cryptoSupport: false, supports3DS: false },
     accounts: { sepa: false, eurIban: false, swift: false, usdAch: false },
     currencies: [],
     billingRegions: [],
@@ -227,6 +232,16 @@ const Index = () => {
       filtered = filtered.filter(s => s.acceptsGooglePay);
     }
 
+    if (filters.recommendations.forDigital) {
+      filtered = filtered.filter(s => s.recommendedForDigital);
+    }
+    if (filters.recommendations.forTravel) {
+      filtered = filtered.filter(s => s.recommendedForTravel);
+    }
+    if (filters.recommendations.forBanking) {
+      filtered = filtered.filter(s => s.recommendedForBanking);
+    }
+
     if (filters.features.cardReissue) {
       filtered = filtered.filter(s => s.cardReissue);
     }
@@ -235,6 +250,9 @@ const Index = () => {
     }
     if (filters.features.cryptoSupport) {
       filtered = filtered.filter(s => s.cryptoSupport);
+    }
+    if (filters.features.supports3DS) {
+      filtered = filtered.filter(s => s.supports3DS);
     }
 
     if (filters.accounts.sepa) {

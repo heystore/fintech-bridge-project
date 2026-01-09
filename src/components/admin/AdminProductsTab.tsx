@@ -29,6 +29,10 @@ interface Service {
   swift?: boolean;
   billingRegions?: string[];
   priority?: number;
+  supports3DS?: boolean;
+  recommendedForDigital?: boolean;
+  recommendedForTravel?: boolean;
+  recommendedForBanking?: boolean;
 }
 
 interface AdminProductsTabProps {

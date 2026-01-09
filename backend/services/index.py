@@ -48,9 +48,13 @@ def handler(event: dict, context) -> dict:
                        accepts_visa as "acceptsVisa", accepts_mastercard as "acceptsMastercard",
                        accepts_apple_pay as "acceptsApplePay", accepts_google_pay as "acceptsGooglePay",
                        card_reissue as "cardReissue", high_payment_approval as "highPaymentApproval",
-                       crypto_support as "cryptoSupport", sepa_iban as "sepaIban",
-                       ach_usd as "achUsd", swift, supported_currencies as "supportedCurrencies",
+                       crypto_support as "cryptoSupport", supports_3ds as "supports3DS",
+                       sepa_iban as "sepaIban", ach_usd as "achUsd", swift, 
+                       supported_currencies as "supportedCurrencies",
                        billing_regions as "billingRegions", card_billing_countries as "cardBillingCountries",
+                       recommended_for_digital as "recommendedForDigital",
+                       recommended_for_travel as "recommendedForTravel",
+                       recommended_for_banking as "recommendedForBanking",
                        priority
                 FROM services
                 ORDER BY priority DESC, created_at DESC
@@ -75,9 +79,11 @@ def handler(event: dict, context) -> dict:
                     line1, line2, line3,
                     background_image, logo_svg, accepts_visa, accepts_mastercard,
                     accepts_apple_pay, accepts_google_pay, card_reissue, high_payment_approval,
-                    crypto_support, sepa_iban, ach_usd, swift, supported_currencies,
-                    billing_regions, card_billing_countries, priority
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    crypto_support, supports_3ds, sepa_iban, ach_usd, swift, supported_currencies,
+                    billing_regions, card_billing_countries,
+                    recommended_for_digital, recommended_for_travel, recommended_for_banking,
+                    priority
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id
             ''', (
                 data['id'], data['name'], data['type'], data['category'],
@@ -87,10 +93,12 @@ def handler(event: dict, context) -> dict:
                 data.get('acceptsVisa', False), data.get('acceptsMastercard', False),
                 data.get('acceptsApplePay', False), data.get('acceptsGooglePay', False),
                 data.get('cardReissue', False), data.get('highPaymentApproval', False),
-                data.get('cryptoSupport', False), data.get('sepaIban', False),
-                data.get('achUsd', False), data.get('swift', False),
+                data.get('cryptoSupport', False), data.get('supports3DS', False),
+                data.get('sepaIban', False), data.get('achUsd', False), data.get('swift', False),
                 data.get('supportedCurrencies', []), data.get('billingRegions', []),
                 data.get('cardBillingCountries', []),
+                data.get('recommendedForDigital', False), data.get('recommendedForTravel', False),
+                data.get('recommendedForBanking', False),
                 data.get('priority', 0)
             ))
             
@@ -118,10 +126,12 @@ def handler(event: dict, context) -> dict:
                     accepts_visa = %s, accepts_mastercard = %s,
                     accepts_apple_pay = %s, accepts_google_pay = %s,
                     card_reissue = %s, high_payment_approval = %s,
-                    crypto_support = %s, sepa_iban = %s,
+                    crypto_support = %s, supports_3ds = %s, sepa_iban = %s,
                     ach_usd = %s, swift = %s,
                     supported_currencies = %s, billing_regions = %s,
                     card_billing_countries = %s,
+                    recommended_for_digital = %s, recommended_for_travel = %s,
+                    recommended_for_banking = %s,
                     priority = %s,
                     updated_at = CURRENT_TIMESTAMP
                 WHERE id = %s
@@ -133,10 +143,12 @@ def handler(event: dict, context) -> dict:
                 data.get('acceptsVisa', False), data.get('acceptsMastercard', False),
                 data.get('acceptsApplePay', False), data.get('acceptsGooglePay', False),
                 data.get('cardReissue', False), data.get('highPaymentApproval', False),
-                data.get('cryptoSupport', False), data.get('sepaIban', False),
-                data.get('achUsd', False), data.get('swift', False),
+                data.get('cryptoSupport', False), data.get('supports3DS', False),
+                data.get('sepaIban', False), data.get('achUsd', False), data.get('swift', False),
                 data.get('supportedCurrencies', []), data.get('billingRegions', []),
                 data.get('cardBillingCountries', []),
+                data.get('recommendedForDigital', False), data.get('recommendedForTravel', False),
+                data.get('recommendedForBanking', False),
                 data.get('priority', 0),
                 data['id']
             ))

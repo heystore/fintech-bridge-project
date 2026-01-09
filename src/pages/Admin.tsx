@@ -29,11 +29,15 @@ interface Service {
   cardReissue?: boolean;
   highPaymentApproval?: boolean;
   cryptoSupport?: boolean;
+  supports3DS?: boolean;
   sepaIban?: boolean;
   achUsd?: boolean;
   supportedCurrencies?: string[];
   swift?: boolean;
   billingRegions?: string[];
+  recommendedForDigital?: boolean;
+  recommendedForTravel?: boolean;
+  recommendedForBanking?: boolean;
   priority?: number;
 }
 
