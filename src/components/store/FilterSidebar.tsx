@@ -156,7 +156,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
 
   return (
     <aside className="w-72 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col fixed left-0 top-16 bottom-0">
-      <div className="p-4 pb-3 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+      <div className="p-4 pb-3 flex-shrink-0">
         <div className="flex items-center justify-between mb-1">
           <h2 className="text-base font-bold text-gray-900 dark:text-white">
             Фильтры
