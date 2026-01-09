@@ -175,7 +175,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
         </p>
       </div>
 
-      <div className="flex-1 p-4 pt-3 flex flex-col justify-evenly overflow-hidden">
+      <div className="flex-1 p-4 pt-2 flex flex-col justify-evenly overflow-hidden">
         <div>
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
             Наши рекомендации

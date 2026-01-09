@@ -26,7 +26,7 @@ const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
           </div>
         </div>
 
-        <nav className="flex items-center gap-1 ml-72">
+        <nav className="flex items-center gap-1 ml-80">
           <Button
             variant="ghost"
             size="sm"
