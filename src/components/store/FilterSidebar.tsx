@@ -155,7 +155,7 @@ const FilterSidebar = ({ onFiltersChange }: FilterSidebarProps) => {
     filters.cardBillingCountries.length > 0;
 
   return (
-    <aside className="w-72 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 flex flex-col fixed right-0 top-16 bottom-0">
+    <aside className="w-72 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col fixed left-0 top-16 bottom-0">
       <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
         <div className="flex items-center justify-between mb-1">
           <h2 className="text-lg font-bold text-gray-900 dark:text-white">

@@ -196,7 +196,12 @@ const Cards = () => {
         />
         
         <div className="flex flex-1 pt-16">
-          <main className="flex-1 p-8 pr-80 overflow-y-auto bg-gray-50 dark:bg-gray-900">
+          <FilterSidebar 
+            onFiltersChange={setFilters}
+            availableCountries={countries}
+          />
+          
+          <main className="flex-1 p-8 pl-80 overflow-y-auto bg-gray-50 dark:bg-gray-900">
             <div className="max-w-7xl mx-auto">
               {loadError && (
                 <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
@@ -228,11 +233,6 @@ const Cards = () => {
               )}
             </div>
           </main>
-          
-          <FilterSidebar 
-            onFiltersChange={setFilters}
-            availableCountries={countries}
-          />
         </div>
       </div>
     </div>
