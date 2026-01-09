@@ -9,7 +9,7 @@ interface HeaderProps {
 const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center">
         <div className="flex items-center gap-3">
           <img 
             src="https://cdn.poehali.dev/files/arnold_250.png" 
@@ -26,47 +26,46 @@ const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <nav className="flex items-center gap-1 ml-72">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="gap-2"
-              onClick={() => window.open('https://t.me/hey_store_official', '_blank')}
-            >
-              <Icon name="Send" size={18} />
-              <span className="text-sm">Канал</span>
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="sm"
-              className="gap-2"
-              onClick={() => window.open('https://t.me/hey_store_bot', '_blank')}
-            >
-              <Icon name="MessageCircle" size={18} />
-              <span className="text-sm">Поддержка</span>
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="sm"
-              className="gap-2"
-              onClick={() => window.open('https://blog.heystore.net', '_blank')}
-            >
-              <Icon name="FileText" size={18} />
-              <span className="text-sm">Блог</span>
-            </Button>
-          </nav>
+        <nav className="flex items-center gap-1 ml-72">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="gap-2"
+            onClick={() => window.open('https://t.me/hey_store_official', '_blank')}
+          >
+            <Icon name="Send" size={18} />
+            <span className="text-sm">Канал</span>
+          </Button>
 
           <Button
             variant="ghost"
             size="sm"
-            onClick={onToggleDarkMode}
+            className="gap-2"
+            onClick={() => window.open('https://t.me/hey_store_bot', '_blank')}
           >
-            <Icon name={darkMode ? 'Sun' : 'Moon'} size={20} />
+            <Icon name="MessageCircle" size={18} />
+            <span className="text-sm">Поддержка</span>
           </Button>
-        </div>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            className="gap-2"
+            onClick={() => window.open('https://blog.heystore.net', '_blank')}
+          >
+            <Icon name="FileText" size={18} />
+            <span className="text-sm">Блог</span>
+          </Button>
+        </nav>
+
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onToggleDarkMode}
+          className="ml-4"
+        >
+          <Icon name={darkMode ? 'Sun' : 'Moon'} size={20} />
+        </Button>
       </div>
     </header>
   );
