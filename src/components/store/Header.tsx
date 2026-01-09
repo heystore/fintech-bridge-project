@@ -10,7 +10,7 @@ const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-6 py-4">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ml-72">
           <div className="flex items-center gap-3">
             <img 
               src="https://cdn.poehali.dev/files/arnold_250.png" 
@@ -26,7 +26,6 @@ const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
               </p>
             </div>
           </div>
-          <div className="h-8 w-px bg-gray-200 dark:bg-gray-700"></div>
           <nav className="flex items-center gap-1">
             <Button
               variant="ghost"
