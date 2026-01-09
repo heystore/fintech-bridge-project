@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import Sidebar from '@/components/store/Sidebar';
 import Header from '@/components/store/Header';
 import FilterSidebar, { Filters } from '@/components/store/FilterSidebar';
 import ServiceCard from '@/components/store/ServiceCard';
@@ -62,8 +61,6 @@ const defaultServices: Service[] = [
 
 const Cards = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [activeSection, setActiveSection] = useState('kyc');
-  const [expandedSections, setExpandedSections] = useState<string[]>(['kyc']);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [filters, setFilters] = useState<Filters>({
@@ -122,79 +119,52 @@ const Cards = () => {
     document.documentElement.classList.toggle('dark');
   };
 
-  const menuItems = [
-    {
-      id: 'kyc',
-      title: 'Активация сервисов',
-      icon: 'UserCheck',
-      hasSubmenu: true,
-      submenu: [
-        { id: 'kyc-fintech', title: 'Финтехи и банки', icon: 'Building' },
-        { id: 'kyc-crypto', title: 'Криптобиржи', icon: 'Bitcoin' },
-        { id: 'kyc-platforms', title: 'Платформы', icon: 'Globe' }
-      ]
-    }
-  ];
-
-  const toggleSection = (id: string) => {
-    if (expandedSections.includes(id)) {
-      setExpandedSections(expandedSections.filter(s => s !== id));
-    } else {
-      setExpandedSections([...expandedSections, id]);
-    }
-  };
-
   const getFilteredServices = () => {
-    let filtered = services;
+    let filtered = services.filter(s => 
+      s.category === 'kyc-fintech' || s.category === 'kyc-crypto' || s.category === 'kyc-platforms'
+    );
 
-    if (activeSection === 'kyc-fintech' || activeSection === 'kyc-crypto' || activeSection === 'kyc-platforms') {
-      filtered = filtered.filter(s => s.category === activeSection);
-    } else if (activeSection === 'kyc') {
+    if (filters.paymentMethods.visa) {
+      filtered = filtered.filter(s => s.acceptsVisa);
+    }
+    if (filters.paymentMethods.mastercard) {
+      filtered = filtered.filter(s => s.acceptsMastercard);
+    }
+    if (filters.paymentMethods.applePay) {
+      filtered = filtered.filter(s => s.acceptsApplePay);
+    }
+    if (filters.paymentMethods.googlePay) {
+      filtered = filtered.filter(s => s.acceptsGooglePay);
+    }
+
+    if (filters.features.cardReissue) {
+      filtered = filtered.filter(s => s.cardReissue);
+    }
+    if (filters.features.highPaymentApproval) {
+      filtered = filtered.filter(s => s.highPaymentApproval);
+    }
+    if (filters.features.cryptoSupport) {
+      filtered = filtered.filter(s => s.cryptoSupport);
+    }
+
+    if (filters.accounts.sepa) {
+      filtered = filtered.filter(s => s.sepaIban);
+    }
+    if (filters.accounts.swift) {
+      filtered = filtered.filter(s => s.swift);
+    }
+    if (filters.accounts.usdAch) {
+      filtered = filtered.filter(s => s.achUsd);
+    }
+
+    if (filters.cardBillingCountries.length > 0) {
       filtered = filtered.filter(s => 
-        s.category === 'kyc-fintech' || s.category === 'kyc-crypto' || s.category === 'kyc-platforms'
+        s.cardBillingCountries && 
+        filters.cardBillingCountries.some(country => s.cardBillingCountries?.includes(country))
       );
     }
 
-    const hasActiveFilters = 
-      Object.values(filters.paymentMethods).some(v => v) ||
-      Object.values(filters.features).some(v => v) ||
-      Object.values(filters.accounts).some(v => v) ||
-      filters.currencies.length > 0 ||
-      filters.billingRegions.length > 0 ||
-      filters.cardBillingCountries.length > 0;
-
-    if (!hasActiveFilters) {
-      return filtered;
-    }
-
-    return filtered.filter(service => {
-      const matchesPaymentMethods = 
-        (!filters.paymentMethods.visa || service.acceptsVisa) &&
-        (!filters.paymentMethods.mastercard || service.acceptsMastercard) &&
-        (!filters.paymentMethods.applePay || service.acceptsApplePay) &&
-        (!filters.paymentMethods.googlePay || service.acceptsGooglePay);
-
-      const matchesFeatures = 
-        (!filters.features.cardReissue || service.cardReissue) &&
-        (!filters.features.highPaymentApproval || service.highPaymentApproval) &&
-        (!filters.features.cryptoSupport || service.cryptoSupport);
-
-      const matchesAccounts = 
-        (!filters.accounts.sepa || service.sepaIban) &&
-        (!filters.accounts.swift || service.swift) &&
-        (!filters.accounts.usdAch || service.achUsd);
-
-      const matchesCurrencies = filters.currencies.length === 0 || 
-        (service.supportedCurrencies && filters.currencies.every(c => service.supportedCurrencies?.includes(c)));
-
-      const matchesBillingRegions = filters.billingRegions.length === 0 || 
-        (service.billingRegions && filters.billingRegions.some(r => service.billingRegions?.includes(r)));
-
-      const matchesCardBillingCountries = filters.cardBillingCountries.length === 0 || 
-        (service.cardBillingCountries && filters.cardBillingCountries.some(c => service.cardBillingCountries?.includes(c)));
-
-      return matchesPaymentMethods && matchesFeatures && matchesAccounts && matchesCurrencies && matchesBillingRegions && matchesCardBillingCountries;
-    });
+    return filtered;
   };
 
   const filteredServices = getFilteredServices();
@@ -208,63 +178,41 @@ const Cards = () => {
         />
         
         <div className="flex flex-1 pt-16">
-          <Sidebar 
-            darkMode={darkMode}
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-            expandedSections={expandedSections}
-            toggleSection={toggleSection}
-            menuItems={menuItems}
-          />
-
           <FilterSidebar 
-            darkMode={darkMode}
-            filters={filters}
-            setFilters={setFilters}
-            activeSection={activeSection}
-            countries={countries}
+            onFiltersChange={setFilters}
+            availableCountries={countries}
           />
 
-          <main className="flex-1 ml-64 lg:ml-80 p-8 overflow-y-auto">
+          <main className="flex-1 p-8 overflow-y-auto bg-gray-50 dark:bg-gray-900">
             <div className="max-w-7xl mx-auto">
-              <div className="mb-8">
-                <h1 className={`text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                  Активация сервисов
-                </h1>
-                <p className={`text-lg ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Профессиональная активация банковских и платёжных сервисов под ключ
-                </p>
-              </div>
-
               {loadError && (
-                <div className="mb-6 p-4 bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 rounded-lg">
-                  {loadError}
+                <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <Icon name="AlertTriangle" size={20} className="text-yellow-600 dark:text-yellow-400" />
+                    <div>
+                      <p className="text-sm font-medium text-yellow-900 dark:text-yellow-100">Проблема с загрузкой</p>
+                      <p className="text-sm text-yellow-700 dark:text-yellow-300">{loadError}. Показаны данные по умолчанию.</p>
+                    </div>
+                  </div>
                 </div>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {isLoading ? (
-                  <div className={`col-span-full text-center py-12 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Загрузка...
-                  </div>
-                ) : filteredServices.length === 0 ? (
-                  <div className={`col-span-full text-center py-12 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    Ничего не найдено. Попробуйте изменить фильтры.
-                  </div>
-                ) : (
-                  filteredServices
-                    .sort((a, b) => (b.priority || 0) - (a.priority || 0))
-                    .map(service => (
-                      <ServiceCard 
-                        key={service.id}
-                        service={service}
-                        darkMode={darkMode}
-                        isSelected={selectedService === service.id}
-                        onClick={() => setSelectedService(selectedService === service.id ? null : service.id)}
-                      />
-                    ))
-                )}
-              </div>
+              {isLoading ? (
+                <div className="flex items-center justify-center py-12">
+                  <Icon name="Loader2" size={32} className="animate-spin text-gray-400" />
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {filteredServices.map(service => (
+                    <ServiceCard 
+                      key={service.id}
+                      service={service}
+                      isSelected={selectedService === service.id}
+                      onClick={() => setSelectedService(service.id)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </main>
         </div>
